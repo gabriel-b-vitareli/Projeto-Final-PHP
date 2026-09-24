@@ -1,7 +1,5 @@
 # Sistema de Catálogo Pessoal de Jogos
 
-# Requisitos do Sistema — Catálogo Pessoal de Jogos
-
 ## Requisitos Funcionais
 
 | ID | Requisito | Descrição | Prioridade |
