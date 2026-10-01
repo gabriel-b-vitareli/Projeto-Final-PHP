@@ -15,3 +15,13 @@ CREATE TABLE jogos(
     cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
+Tabela de usuários:
+
+```sql
+CREATE TABLE usuarios(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(60)
+);
+```
