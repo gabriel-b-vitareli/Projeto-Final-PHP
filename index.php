@@ -149,6 +149,23 @@
             line-height: 1.4;
             margin: 0;
         }
+
+        .icone {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin: 0 auto 16px;
+            /* centraliza a caixa e dá espaço pro título */
+        }
+
+        .icone img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     </style>
     <title>GameShelf</title>
 </head>
@@ -180,19 +197,19 @@
     <div class="servicos-container">
 
         <div class="servico-item">
-            <div class="icone">🗂️</div>
+            <div class="icone"><img src="/uploads/pasta-icon.png" alt="🗂️"></div>
             <h3><span>1.</span> Organização Total</h3>
             <p>Cadastre jogos por plataforma, gênero e status</p>
         </div>
 
         <div class="servico-item">
-            <div class="icone">⭐</div>
+            <div class="icone"><img src="/uploads/estrela-icon.png" alt="⭐"></div>
             <h3><span>2.</span> Avaliações e Notas</h3>
             <p>Atribua estrelas e escreva resenhas</p>
         </div>
 
         <div class="servico-item">
-            <div class="icone">📊</div>
+            <div class="icone"><img src="/uploads/grafico-icon.png" alt="📊"></div>
             <h3><span>3.</span> Estatísticas e Filtros</h3>
             <p>Consulte dados do seu acervo e aplique filtros</p>
         </div>

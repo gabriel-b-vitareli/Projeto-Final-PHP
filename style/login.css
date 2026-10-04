@@ -1,0 +1,322 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --fundo: #090814;
+  --card: #0f0c20;
+  --borda: #2a2250;
+  --campo: #131028;
+  --texto: #ffffff;
+  --texto-suave: #9a93c4;
+  --roxo: #8b5cf6;
+  --roxo-escuro: #6d3df0;
+  --roxo-claro: #b79cf8;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+}
+
+.pagina {
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* ---------- Lado esquerdo ---------- */
+
+.apresentacao {
+  flex: 1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+
+.logo-icone {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo));
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.logo-texto {
+  font-size: 44px;
+  font-weight: 700;
+}
+
+.logo-texto span {
+  color: var(--roxo);
+}
+
+.apresentacao h1 {
+  font-size: 32px;
+  line-height: 1.3;
+  color: var(--roxo-claro);
+  margin-bottom: 16px;
+}
+
+.apresentacao h1 span {
+  color: var(--roxo);
+}
+
+.subtitulo {
+  color: var(--texto-suave);
+  max-width: 340px;
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+.beneficios {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.beneficios li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.beneficio-icone {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0; /* evita a caixa amassar quando o texto é longo */
+  padding: 6px;   /* respiro entre o ícone e a borda */
+}
+
+.beneficio-icone img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* encaixa sem distorcer */
+}
+
+.beneficios strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.beneficios small {
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+/* ---------- Card de login ---------- */
+
+.card {
+  width: 100%;
+  max-width: 550px;
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 56px 62px;
+}
+
+.card h2 {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.card h2 span {
+  color: var(--roxo);
+}
+
+.card-subtitulo {
+  color: var(--texto-suave);
+  margin-bottom: 36px;
+}
+
+form label {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+  width: 100%;
+  height: 52px;
+  background: var(--campo);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0 16px;
+  color: var(--texto);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+form input::placeholder {
+  color: var(--texto-suave);
+}
+
+form input:focus {
+  outline: none;
+  border-color: var(--roxo);
+}
+
+.linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.lembrar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.linha a,
+.cadastro a {
+  color: var(--roxo);
+  font-size: 13px;
+}
+
+/* ---------- Botões ---------- */
+
+.botao-entrar,
+.botao-google {
+  width: 100%;
+  height: 52px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.botao-entrar {
+  background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo-claro));
+  border: none;
+  color: var(--texto);
+}
+
+.botao-google {
+  background: transparent;
+  border: 1px solid var(--roxo-escuro);
+  color: var(--texto);
+}
+
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--texto-suave);
+  font-size: 13px;
+  margin: 24px 0;
+}
+
+.divisor::before,
+.divisor::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--borda);
+}
+
+.cadastro {
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 14px;
+  margin-top: 40px;
+}
+
+.cadastro a {
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+/* ---------- Telas menores ---------- */
+
+@media (max-width: 900px) {
+  .pagina {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .card {
+    padding: 36px 24px;
+  }
+}
+
+/* ---------- Cadastro ---------- */
+
+/* benefícios lado a lado, só com o título */
+.beneficios-linha {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.beneficios-linha li {
+  gap: 10px;
+}
+
+.beneficios-linha strong {
+  max-width: 110px;
+  font-size: 14px;
+}
+
+/* cabeçalho do card com a caixinha do ícone ao lado do título */
+.card-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.card-cabecalho h2 {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.card-cabecalho .card-subtitulo {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.icone-card {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 12px;
+}
+
+/* frase com a linha roxa na lateral */
+.frase-rodape {
+  border-left: 2px solid var(--roxo);
+  padding-left: 12px;
+  margin-top: 48px;
+  color: var(--texto-suave);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.frase-rodape span {
+  color: var(--roxo);
+}
