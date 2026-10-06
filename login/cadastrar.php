@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/login.css">
+    <link rel="shortcut icon" href="../uploads/favicon.ico" type="image/x-icon">
     <title>Cadastre-se</title>
 </head>
 

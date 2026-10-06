@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style/homepage.css">
+  <link rel="shortcut icon" href="../uploads/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -65,13 +66,6 @@
       <a class="nav__item" href="/pages/carrinho.php"><svg class="icon"><use href="#i-cart"/></svg><span>Carrinho</span><span class="count">3</span></a>
       <a class="nav__item" href="/pages/configuracoes.php"><svg class="icon"><use href="#i-gear"/></svg><span>Configurações</span></a>
     </nav>
-
-    <div class="plus">
-      <svg class="icon plus__icon"><use href="#i-crown"/></svg>
-      <h2 class="plus__title">Jogue mais,<br>gaste menos!</h2>
-      <p>Assine o GameShelf Plus e tenha acesso a descontos exclusivos, jogos grátis e muito mais.</p>
-      <a class="btn btn--primary btn--block" href="/plus">Saiba mais <svg class="icon"><use href="#i-arrow"/></svg></a>
-    </div>
   </aside>
 
   <!-- ============ TOPO ============ -->
@@ -79,14 +73,13 @@
     <label class="search">
       <svg class="icon"><use href="#i-search"/></svg>
       <input type="search" name="q" placeholder="Buscar por jogos, gêneros, plataformas...">
-      <kbd>Ctrl + K</kbd>
     </label>
     <div class="topbar__actions">
       <button class="icon-btn" type="button" aria-label="Alternar tema"><svg class="icon"><use href="#i-sun"/></svg></button>
       <button class="icon-btn has-dot" type="button" aria-label="Notificações"><svg class="icon"><use href="#i-bell"/></svg></button>
       <a class="user" href="/perfil">
         <img class="user__avatar" src="assets/users/avatar.jpg" alt="">
-        <span>PlayerOne</span>
+        <span>(nome do usuario vem aqui depois)</span>
         <svg class="icon"><use href="#i-down"/></svg>
       </a>
     </div>
@@ -100,23 +93,14 @@
       <section class="hero" aria-label="Destaque">
         <img class="hero__bg" src="assets/banners/sekiro.jpg" alt="">
         <div class="hero__body">
-          <span class="badge badge--new">Lançamento</span>
-          <h1 class="hero__title">Sekiro<small>Shadows Die Twice</small></h1>
-          <p class="hero__desc">Enfrente seus próprios demônios em uma jornada épica de honra, vingança e sobrevivência.</p>
+          <h1>NomedoJogo<small>Segundo nome do jogo</small></h1>
+          <p class="hero__desc">Descrição do jogo</p>
           <p class="hero__price">
-            <data value="199.90">R$ 199,90</data>
-            <s>R$ 249,90</s>
-            <span class="badge badge--discount">-20%</span>
+            <s>R$ preço do jogo</s>
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="/comprar/sekiro"><svg class="icon"><use href="#i-cart"/></svg>Comprar agora</a>
-            <button class="btn btn--ghost" type="button"><svg class="icon"><use href="#i-heart"/></svg>Adicionar à lista de desejos</button>
-          </div>
-        </div>
-        <div class="hero__nav">
-          <button type="button" aria-label="Anterior"><svg class="icon"><use href="#i-arrow" style="transform:scaleX(-1);transform-origin:center"/></svg></button>
-          <ol class="dots"><li class="is-active"></li><li></li><li></li><li></li></ol>
-          <button type="button" aria-label="Próximo"><svg class="icon"><use href="#i-arrow"/></svg></button>
+            <a class="btn btn--primary" href="#"><svg class="icon"><use href="#i-cart"/></svg>Comprar agora</a>
+         </div>
         </div>
       </section>
 
@@ -125,7 +109,7 @@
         <header class="section__head">
           <svg class="icon section__icon"><use href="#i-flame"/></svg>
           <div><h2>Em alta agora</h2><p>Os jogos mais vendidos da semana.</p></div>
-          <a class="link" href="/loja?ordem=mais-vendidos">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></a>
+          <a class="link" href="/pages/loja.php">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></a>
         </header>
 
         <ul class="grid">

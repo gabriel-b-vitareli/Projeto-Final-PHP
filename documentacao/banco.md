@@ -23,6 +23,7 @@ Tabela de usuários:
 CREATE TABLE usuarios(
     id SERIAL PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL UNIQUE,
-    senha VARCHAR(60)
+    senha VARCHAR(60),
+    nivel INT DEFAULT 0
 );
 ```
