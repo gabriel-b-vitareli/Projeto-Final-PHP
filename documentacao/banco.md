@@ -7,12 +7,12 @@ CREATE TABLE jogos(
     plataforma VARCHAR(30) NOT NULL, 
     genero VARCHAR(50) NOT NULL, 
     desenvolvedora VARCHAR(100), 
-    lancamento INT, 
+    lancamento DATE NOT NULL, 
     status VARCHAR(60) NOT NULL, 
     estrelas INT, 
     avaliacao TEXT, 
     conclusao DATE, 
-    cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    cadastrado_por INT NOT NULL
 );
 ```
 
@@ -21,7 +21,7 @@ Tabela de usuários:
 ```sql
 CREATE TABLE usuarios(
     id SERIAL PRIMARY KEY,
-    email VARCHAR(50) NOT NULL UNIQUE,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
     senha VARCHAR(60)
 );
 ```

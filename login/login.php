@@ -10,9 +10,8 @@
 
 <body>
     <?php
-    // include '../includes/header.php';
-    // include '../includes/functions.php';
-    // session_start();
+    include '../includes/functions.php';
+    session_start();
     ?>
   <main class="pagina">
  
@@ -55,18 +54,14 @@
       <h2>Bem-vindo <span>de volta!</span></h2>
       <p class="card-subtitulo">Faça login para acessar seu catálogo.</p>
  
-      <form>
-        <label for="usuario">E-mail ou usuário</label>
-        <input type="text" id="usuario" placeholder="Digite seu e-mail ou usuário">
+      <form method="POST">
+        <label for="usuario">Nome de usuário</label>
+        <input type="text" id="usuario" name="usuario" placeholder="Digite seu e-mail ou usuário" required>
  
         <label for="senha">Senha</label>
-        <input type="password" id="senha" placeholder="Digite sua senha">
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
  
         <button type="submit" class="botao-entrar">Entrar</button>
- 
-        <div class="divisor"><span>ou</span></div>
- 
-        <button type="button" class="botao-google">Entrar com Google</button>
       </form>
  
       <p class="cadastro">Ainda não tem uma conta? <a href="/login/cadastrar.php">Cadastre-se</a></p>
@@ -74,17 +69,15 @@
  
   </main>
     <?php
-    // if (isset($_POST['email']) and isset($_POST['senha'])) {
-    //     $usuario = consultarUsuario($conexao, $_POST['email']);
-    //     if ($_POST['email'] == $usuario['email'] && $_POST['senha'] == $usuario['senha']) {
-    //         $_SESSION['id'] = $usuario['id'];
-    //         echo "<hr>Login aceito.";
-    //         sleep(5);
-    //         header("Location: ../index.php");
-    //     } else {
-    //         echo "<hr>Usuário inexistente. Tente novamente";
-    //     }
-    // }
+    if (isset($_POST['usuario']) and isset($_POST['senha'])) {
+        $usuario = consultarUsuario($conexao, $_POST['usuario']);
+        if ($_POST['usuario'] == $usuario['usuario'] && $_POST['senha'] == $usuario['senha']) {
+            $_SESSION['id'] = $usuario['id'];
+            header("Location: ../pages/inicial.php");
+        } else {
+            echo "<hr>Usuário inexistente. Tente novamente";
+        }
+    }
     ?>
 </body>
 

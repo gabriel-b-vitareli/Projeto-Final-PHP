@@ -10,8 +10,8 @@
 
 <body>
     <?php
-    // include '../includes/header.php';
-    // include '../includes/functions.php';
+    include '../includes/functions.php';
+    include '../includes/conexao.php';
     ?>
     <main class="pagina">
 
@@ -52,24 +52,19 @@
                 </div>
             </div>
 
-            <form>
-                <label for="usuario">Nome de usuário</label>
-                <input type="text" id="usuario" placeholder="Escolha um nome de usuário">
-
-                <label for="email">E-mail</label>
-                <input type="text" id="email" placeholder="Digite seu e-mail">
+            <form method="POST">
+                <label for="email">Nome de usuário</label>
+                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required>
 
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" placeholder="Crie uma senha">
+                <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required>
 
                 <label for="confirmar-senha">Confirmar senha</label>
-                <input type="password" id="confirmar-senha" placeholder="Confirme sua senha">
+                <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirme sua senha" required>
 
                 <button type="submit" class="botao-entrar">Criar conta</button>
 
                 <div class="divisor"><span>ou</span></div>
-
-                <button type="button" class="botao-google">Cadastrar com Google</button>
             </form>
 
             <p class="cadastro">Já tem uma conta? <a href="login.php">Faça login</a></p>
@@ -78,10 +73,14 @@
     </main>
     <?php
 
-    // if(isset($_POST['email']) and isset($_POST['senha'])){
-    //     echo "<hr>";
-    //     cadastrarUsuario($conexao, $_POST['email'], $_POST['senha']);
-    // }
+    if(isset($_POST['username']) and isset($_POST['senha']) and isset($_POST['confirmar-senha'])){
+        if($_POST['senha'] == $_POST['confirmar-senha']){
+            cadastrarUsuario($conexao, $_POST['username'], $_POST['senha']);
+            echo '<p class="cadastro">Conta cadastrada com sucesso!</p>';
+        } else{
+            echo '<p class="cadastro">Suas senhas não batem.</p>';
+        }
+    }
 
     ?>
 </body>
