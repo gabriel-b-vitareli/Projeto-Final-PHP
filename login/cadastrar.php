@@ -22,12 +22,12 @@
             </div>
 
             <h1>Comece sua jornada<br>no <span>mundo dos games.</span></h1>
-            <p class="subtitulo">Crie sua conta e tenha seu próprio catálogo, avalie seus jogos e acompanhe sua evolução.</p>
+            <p class="subtitulo">Crie sua conta e garanta os melhores jogos, pelos melhores preços.</p>
 
             <ul class="beneficios beneficios-linha">
                 <li>
                     <span class="beneficio-icone"><img src="../uploads/controle-icon.png" alt="🎮"></span>
-                    <strong>Organize seu catálogo</strong>
+                    <strong>Jogue os melhores jogos</strong>
                 </li>
                 <li>
                     <span class="beneficio-icone"><img src="../uploads/estrela-icon.png" alt="⭐"></span>
@@ -35,11 +35,11 @@
                 </li>
                 <li>
                     <span class="beneficio-icone"><img src="../uploads/grafico-icon.png" alt="📊"></span>
-                    <strong>Acompanhe seu progresso</strong>
+                    <strong>Pague os melhores preços</strong>
                 </li>
             </ul>
 
-            <p class="frase-rodape">Mais que um catálogo,<br><span>é o seu universo de jogos.</span></p>
+            <p class="frase-rodape">Mais jogos,<br><span>mais histórias.</span></p>
         </section>
 
         <!-- Card de cadastro -->

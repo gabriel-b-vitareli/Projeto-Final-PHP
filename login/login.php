@@ -21,29 +21,29 @@
         <img src="../uploads/banner-maior.png" alt="Logo do site" width="450">
       </div>
  
-      <h1>Todos os seus jogos,<br><span>em um só lugar.</span></h1>
-      <p class="subtitulo">Cadastre, avalie e acompanhe sua jornada no mundo dos games.</p>
+      <h1>Sua próxima jornada<br><span>começa aqui.</span></h1>
+      <p class="subtitulo">Compre, jogue e viva grandes histórias.</p>
  
       <ul class="beneficios">
         <li>
           <span class="beneficio-icone"><img src="../uploads/controle-icon.png" alt="🎮"></span>
           <div>
-            <strong>Organize seu catálogo</strong>
-            <small>Tenha todos os seus jogos em um só lugar.</small>
+            <strong>Os melhores jogos</strong>
+            <small>Lançamentos, clássicos e muito mais.</small>
           </div>
         </li>
         <li>
           <span class="beneficio-icone"><img src="../uploads/estrela-icon.png" alt="⭐"></span>
           <div>
-            <strong>Avalie e comente</strong>
-            <small>Registre suas experiências e opiniões.</small>
+            <strong>Os melhores preços</strong>
+            <small>Ofertas imperdíveis todos os dias.</small>
           </div>
         </li>
         <li>
           <span class="beneficio-icone"><img src="../uploads/grafico-icon.png" alt="📊"></span>
           <div>
-            <strong>Acompanhe seu progresso</strong>
-            <small>Veja suas conquistas e estatísticas.</small>
+            <strong>Estatísticamente melhor que a concorrência</strong>
+            <small>Melhores preços, melhores jogos, melhores histórias.</small>
           </div>
         </li>
       </ul>
@@ -52,7 +52,7 @@
     <!-- Card de login -->
     <section class="card">
       <h2>Bem-vindo <span>de volta!</span></h2>
-      <p class="card-subtitulo">Faça login para acessar seu catálogo.</p>
+      <p class="card-subtitulo">Faça login para acessar.</p>
  
       <form method="POST">
         <label for="usuario">Nome de usuário</label>

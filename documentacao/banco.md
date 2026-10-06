@@ -4,15 +4,16 @@ CREATE TABLE jogos(
     id SERIAL PRIMARY KEY, 
     titulo VARCHAR(100) NOT NULL, 
     capa VARCHAR(500), 
-    plataforma VARCHAR(30) NOT NULL, 
-    genero VARCHAR(50) NOT NULL, 
+    plataforma VARCHAR(100), 
+    genero VARCHAR(50), 
     desenvolvedora VARCHAR(100), 
     lancamento DATE NOT NULL, 
-    status VARCHAR(60) NOT NULL, 
-    estrelas INT, 
-    avaliacao TEXT, 
-    conclusao DATE, 
-    cadastrado_por INT NOT NULL
+    descricao TEXT, 
+    nota DECIMAL(3,1), 
+    idade INTEGER,
+    preco DECIMAL(10,2) NOT NULL,
+    estoque INTEGER DEFAULT 0,
+    destaque BOOLEAN DEFAULT FALSE
 );
 ```
 
