@@ -320,3 +320,13 @@ form input:focus {
 .frase-rodape span {
   color: var(--roxo);
 }
+/* Mensagens de erro / sucesso dentro do card */
+.mensagem {
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: 1px solid var(--borda);
+}
+.mensagem--erro { border-color: #fb7185; color: #fb7185; }
+.mensagem--ok   { border-color: #34d399; color: #34d399; }
