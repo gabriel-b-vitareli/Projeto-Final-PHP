@@ -12,6 +12,7 @@
 <body>
     <?php
     include '../includes/functions.php';
+    include '../includes/conexao.php';
     session_start();
     ?>
   <main class="pagina">

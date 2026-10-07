@@ -255,18 +255,6 @@
         <a class="btn btn--primary btn--block" href="/checkout">Finalizar compra <svg class="icon"><use href="#i-arrow"/></svg></a>
       </section>
 
-      <!-- Cupom -->
-      <section class="panel promo">
-        <div class="promo__head">
-          <span class="promo__icon"><svg class="icon"><use href="#i-ticket"/></svg></span>
-          <div>
-            <h2>Ganhe 10% de desconto na sua primeira compra!</h2>
-            <p>Use o cupom <b>BEMVINDO10</b><br>no checkout.</p>
-          </div>
-        </div>
-        <div class="coupon"><code>BEMVINDO10</code><button type="button" aria-label="Copiar cupom"><svg class="icon"><use href="#i-copy"/></svg></button></div>
-      </section>
-
       <!-- Mais vendidos -->
       <section class="panel">
         <h2 class="panel__title"><svg class="icon"><use href="#i-trophy"/></svg>Mais vendidos</h2>
