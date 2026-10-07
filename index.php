@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['id'])) {
+    header("Location: /pages/inicial.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
