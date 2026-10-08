@@ -1,0 +1,5 @@
+# Tira as pastas de uploads do servidor do rastreamento git. Deixar isso salvará posteriormente os uploads no repositório, e isso pode ser ruim (ou bom, a depender do ponto de vista e dos objetivos)
+
+/capas
+/heros
+/logos
