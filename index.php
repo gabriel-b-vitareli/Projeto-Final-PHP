@@ -186,9 +186,9 @@ if (isset($_SESSION['id'])) {
     </header>
     <br>
     <div align='center'>
-        <h1>Organize, avalie e registre<br>toda sua jornada gamer.</h1>
+        <h1>Sua próxima jornada<br>começa aqui</h1>
         <br>
-        <p>Acompanhe seus jogos concluídos, crie diários de avaliação e<br>gerencie seu catálogo pessoal em um só lugar.</p>
+        <p>Os melhores jogos<br>com os melhores preços.</p>
     </div>
 
     <br>
@@ -206,19 +206,19 @@ if (isset($_SESSION['id'])) {
         <div class="servico-item">
             <div class="icone"><img src="/uploads/pasta-icon.png" alt="🗂️"></div>
             <h3><span>1.</span> Organização Total</h3>
-            <p>Cadastre jogos por plataforma, gênero e status</p>
+            <p>Compre e veja sua coleção de jogos com facilidade</p>
         </div>
 
         <div class="servico-item">
             <div class="icone"><img src="/uploads/estrela-icon.png" alt="⭐"></div>
-            <h3><span>2.</span> Avaliações e Notas</h3>
-            <p>Atribua estrelas e escreva resenhas</p>
+            <h3><span>2.</span> Os melhores jogos</h3>
+            <p>Navegue pelas melhores opções do mercado</p>
         </div>
 
         <div class="servico-item">
             <div class="icone"><img src="/uploads/grafico-icon.png" alt="📊"></div>
-            <h3><span>3.</span> Estatísticas e Filtros</h3>
-            <p>Consulte dados do seu acervo e aplique filtros</p>
+            <h3><span>3.</span> Os melhores preços</h3>
+            <p>Promoções exclusivas e incríveis garantidas.</p>
         </div>
 
     </div>
