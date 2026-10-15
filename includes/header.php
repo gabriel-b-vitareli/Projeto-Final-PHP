@@ -73,10 +73,9 @@ function itemMenu($chave, $href, $icone, $texto, $atual, $contador = null)
       itemMenu('meus-jogos', '/pages/meus-jogos.php',   'i-pad',   'Meus Jogos',    $paginaAtual);
       itemMenu('favoritos',  '/pages/favoritos.php',    'i-heart', 'Favoritos',     $paginaAtual);
       itemMenu('carrinho',   '/pages/carrinho.php',     'i-cart',  'Carrinho',      $paginaAtual, $qtdCarrinho);
-      itemMenu('config',     '/pages/configuracoes.php','i-gear',  'Configurações', $paginaAtual);
       if ($ehAdmin) {
-    itemMenu('admin', '/pages/cadastrar-game.php', 'i-crown', 'Cadastrar jogo', $paginaAtual);
-}
+        itemMenu('admin', '/pages/gerenciar-jogos.php', 'i-crown', 'Gerenciar jogos', $paginaAtual);
+      }
       ?>
     </nav>
 
@@ -94,13 +93,6 @@ function itemMenu($chave, $href, $icone, $texto, $atual, $contador = null)
       </label>
     </form>
     <div class="topbar__actions">
-      <!-- tema e notificações ainda são só visuais -->
-      <button class="icon-btn" type="button" aria-label="Alternar tema"><svg class="icon"><use href="#i-sun"/></svg></button>
-      <button class="icon-btn has-dot" type="button" aria-label="Notificações"><svg class="icon"><use href="#i-bell"/></svg></button>
-      <a class="user" href="/pages/perfil.php">
-        <img class="user__avatar" src="/uploads/user-icon.png" alt="">
-        <span><?= e($nomeUsuario) ?></span>
-        <svg class="icon"><use href="#i-down"/></svg>
-      </a>
+      <span class="user"><img class="user__avatar" src="/uploads/user-icon.png" alt=""><span><?= e($nomeUsuario) ?></span></span>
     </div>
   </header>
