@@ -62,7 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </li>
                 <li>
                     <span class="beneficio-icone"><img src="/uploads/estrela-icon.png" alt=""></span>
+<<<<<<< HEAD
                     <strong>Favorite e monte seu carrinho</strong>
+=======
+                    <strong>Avalie e comente</strong>
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
                 </li>
                 <li>
                     <span class="beneficio-icone"><img src="/uploads/grafico-icon.png" alt=""></span>

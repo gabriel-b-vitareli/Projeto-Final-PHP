@@ -1,6 +1,10 @@
 # Gameshelf
 
+<<<<<<< HEAD
 Loja virtual de jogos feita em PHP puro (PDO) com PostgreSQL. Esta é a **versão beta**: o fluxo do cliente vai da vitrine até o carrinho, e a equipe administra o catálogo por um painel próprio. Pagamento e entrega dos jogos ficam para uma versão futura.
+=======
+Loja virtual de jogos feita em PHP puro (PDO) com PostgreSQL. Projeto de estudo: o pagamento e a entrega dos jogos ainda não existem.
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
 
 ## Como rodar
 
@@ -11,7 +15,11 @@ Loja virtual de jogos feita em PHP puro (PDO) com PostgreSQL. Esta é a **versã
    psql -U seu_usuario -d gameshelf -f database/seed.sql
    ```
 
+<<<<<<< HEAD
    O `schema.sql` também pode ser rodado em cima de um banco que já existe: ele cria o que falta e remove as colunas antigas de avaliação, estoque e vendas (veja o bloco "Limpeza da versão beta" no fim do arquivo).
+=======
+   O `schema.sql` pode ser rodado em cima do banco que você já tem: ele só adiciona o que falta.
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
 
 2. **Conexão**: copie `includes/conexao.example.php` para `includes/conexao.php` e coloque seus dados. Esse arquivo não vai pro Git.
 
@@ -21,6 +29,7 @@ Loja virtual de jogos feita em PHP puro (PDO) com PostgreSQL. Esta é a **versã
    php -S localhost:8000
    ```
 
+<<<<<<< HEAD
    A extensão `pdo_pgsql` precisa estar ativa no `php.ini`. Para enviar imagens grandes, confira `upload_max_filesize` e `post_max_size`.
 
 4. Abra `http://localhost:8000` e crie uma conta.
@@ -71,18 +80,48 @@ Cada jogo tem três imagens opcionais, enviadas pelo painel de administração:
 | Banner | `uploads/heros/` | JPG, PNG, WebP | 8 MB | fundo do destaque da home |
 
 O servidor confere o conteúdo real do arquivo (não a extensão), salva com nome aleatório e cria as pastas sozinho. Sem capa, o card mostra o título do jogo. Também é possível apontar uma imagem por SQL, com o nome do arquivo ou um link `http(s)://` completo:
+=======
+   A extensão `pdo_pgsql` precisa estar ativa no `php.ini`.
+
+4. Abra `http://localhost:8000`.
+
+## Capas dos jogos
+
+Coloque as imagens em `uploads/capas/` e preencha a coluna `capa`:
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
 
 ```sql
 UPDATE jogos SET capa = 'elden-ring.jpg' WHERE titulo = 'Elden Ring';
 ```
 
+<<<<<<< HEAD
 As pastas de imagens enviadas ficam fora do Git (veja `uploads/.gitignore`).
+=======
+Também aceita um link `http(s)://` completo. Sem capa, o card mostra o título.
+
+## O que já funciona
+
+- Cadastro e login (senha com `password_hash`, mensagens de erro no próprio formulário, sessão renovada no login)
+- Contas antigas com senha em texto puro entram uma última vez e são convertidas para hash automaticamente
+- Home com dados do banco: destaque, em alta (promoções mais vendidas), novidades, mais vendidos
+- Loja com busca, filtro por plataforma e gênero e ordenação
+- Página do jogo
+- Favoritos (coração em qualquer card)
+- Carrinho (adicionar, remover, total)
+
+## O que ainda é só visual
+
+- Finalizar compra / pagamento (botão desativado de propósito)
+- Meus Jogos, Perfil, Configurações e Cadastrar jogo (páginas em construção)
+- Botões de tema e notificações no topo
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
 
 ## Estrutura
 
 ```
 index.php            landing page
 login/               login, cadastro, logout, verifica-login
+<<<<<<< HEAD
 pages/               páginas internas
   inicial, loja, jogo, favoritos, carrinho       (clientes)
   gerenciar-jogos, cadastrar-game, editar-jogo   (administradores)
@@ -93,12 +132,28 @@ database/            schema.sql e seed.sql
 style/               global, login, homepage e app (complementos)
 uploads/             logos do site, ícones e imagens dos jogos
 documentacao/        requisitos, paleta de cores e banco de dados
+=======
+pages/               páginas internas (inicial, loja, jogo, carrinho, favoritos...)
+acoes/               recebem os POST (favoritar, carrinho) e redirecionam
+includes/            conexao, functions (banco), componentes (HTML reutilizável), header/footer
+database/            schema.sql e seed.sql
+style/               global, login, homepage e app (complementos)
+uploads/             logos, ícones e capas
+documentacao/        requisitos, paleta e banco
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
 ```
 
 ## Convenções do código
 
+<<<<<<< HEAD
 - Toda página interna começa com `login/verifica-login.php`, antes de qualquer HTML. As páginas de administração usam `includes/admin-nivel1.php`, que já inclui essa verificação.
 - Todo texto vindo do banco ou do usuário passa por `e()` antes de aparecer na tela.
 - Toda consulta usa `prepare` com parâmetros. Nada de variável dentro da string SQL (a ordenação vem de uma lista fixa).
 - Alterações (favoritar, carrinho, editar, excluir) são sempre POST. As de administração levam token CSRF.
 - Redirecionamentos para a página de origem passam por `urlSegura()`, que só aceita caminhos internos.
+=======
+- Toda página interna começa com `login/verifica-login.php`, antes de qualquer HTML.
+- Todo texto vindo do banco ou do usuário passa por `e()` antes de aparecer na tela.
+- Toda consulta usa `prepare` com parâmetros. Nada de variável dentro da string SQL.
+- Alterações (favoritar, carrinho) são sempre POST.
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c

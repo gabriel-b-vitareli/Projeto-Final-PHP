@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Banco de dados
 
 PostgreSQL. O arquivo `database/schema.sql` cria tudo (e pode ser rodado de novo sem perder dados de tabelas existentes); `database/seed.sql` insere os jogos de exemplo.
@@ -87,3 +88,34 @@ Jogo digital: um de cada, então não há coluna de quantidade. O total é a som
 ## Fora do banco nesta versão
 
 Não existem tabelas de pedidos, pagamentos, biblioteca, avaliações nem colunas de estoque e vendas. Bancos criados em versões anteriores perdem as colunas `nota`, `qtd_avaliacoes`, `estoque` e `vendas` ao rodar o `schema.sql` de novo.
+=======
+Criando a tabela de jogos:
+```sql
+CREATE TABLE jogos( 
+    id SERIAL PRIMARY KEY, 
+    titulo VARCHAR(100) NOT NULL, 
+    capa VARCHAR(500), 
+    plataforma VARCHAR(100), 
+    genero VARCHAR(50), 
+    desenvolvedora VARCHAR(100), 
+    lancamento DATE NOT NULL, 
+    descricao TEXT, 
+    nota DECIMAL(3,1), 
+    idade INTEGER,
+    preco DECIMAL(10,2) NOT NULL,
+    estoque INTEGER DEFAULT 0,
+    destaque BOOLEAN DEFAULT FALSE
+);
+```
+
+Tabela de usuários:
+
+```sql
+CREATE TABLE usuarios(
+    id SERIAL PRIMARY KEY,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(60),
+    nivel INT DEFAULT 0
+);
+```
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c

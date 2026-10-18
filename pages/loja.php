@@ -8,8 +8,14 @@ $tituloPagina = 'Loja';
 
 $plataformas = ['PC', 'PS', 'Xbox', 'Switch'];
 $ordens = [
+<<<<<<< HEAD
     'relevantes' => 'Mais populares',
     'novos'      => 'Lançamentos',
+=======
+    'relevantes' => 'Mais vendidos',
+    'novos'      => 'Lançamentos',
+    'nota'       => 'Melhor avaliados',
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
     'menor'      => 'Menor preço',
     'maior'      => 'Maior preço',
     'nome'       => 'Nome (A-Z)',

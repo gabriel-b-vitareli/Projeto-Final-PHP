@@ -35,6 +35,10 @@ require __DIR__ . '/../includes/header.php';
           <div>
             <?= htmlPlataformas($jogo) ?>
             <h1 class="jogo__titulo"><?= e($jogo['titulo']) ?></h1>
+<<<<<<< HEAD
+=======
+            <p class="rating"><?= htmlNota($jogo) ?></p>
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
           </div>
 
           <p class="jogo__desc"><?= nl2br(e($jogo['descricao'] ?: 'Este jogo ainda não tem descrição.')) ?></p>
