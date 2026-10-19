@@ -2,15 +2,7 @@
 /*
  * Topo padrão das páginas internas (abre <html>, sidebar e barra superior).
  * Antes de incluir, a página define (opcional):
-<<<<<<< HEAD
  *   $paginaAtual  -> 'inicio' | 'loja' | 'favoritos' | 'carrinho' | 'admin'
-=======
-<<<<<<< HEAD
- *   $paginaAtual  -> 'inicio' | 'loja' | 'favoritos' | 'carrinho' | 'admin'
-=======
- *   $paginaAtual  -> 'inicio' | 'loja' | 'meus-jogos' | 'favoritos' | 'carrinho' | 'config'
->>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
->>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
  *   $tituloPagina -> texto da aba do navegador
  *   $buscaAtual   -> texto que já aparece na busca
  * E precisa ter incluído login/verifica-login.php ANTES (ele pode redirecionar).
@@ -78,13 +70,6 @@ function itemMenu($chave, $href, $icone, $texto, $atual, $contador = null)
       <?php
       itemMenu('inicio',     '/pages/inicial.php',      'i-home',  'Início',        $paginaAtual);
       itemMenu('loja',       '/pages/loja.php',         'i-bag',   'Loja',          $paginaAtual);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-      itemMenu('meus-jogos', '/pages/meus-jogos.php',   'i-pad',   'Meus Jogos',    $paginaAtual);
->>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
->>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
       itemMenu('favoritos',  '/pages/favoritos.php',    'i-heart', 'Favoritos',     $paginaAtual);
       itemMenu('carrinho',   '/pages/carrinho.php',     'i-cart',  'Carrinho',      $paginaAtual, $qtdCarrinho);
       if ($ehAdmin) {
