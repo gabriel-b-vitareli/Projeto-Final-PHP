@@ -2,7 +2,14 @@
 require_once __DIR__ . '/../login/verifica-login.php';
 require_once __DIR__ . '/../includes/functions.php';
 require_once __DIR__ . '/../includes/componentes.php';
+<<<<<<< HEAD
 require_once __DIR__ . '/../includes/imagens.php';
+=======
+<<<<<<< HEAD
+require_once __DIR__ . '/../includes/imagens.php';
+=======
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
 
 /* ---------- Acesso: só nível 1 ----------
  * Quem não for admin recebe um 404 comum (sem redirecionar nem avisar "acesso negado"),
@@ -20,12 +27,79 @@ if ((int)$st->fetchColumn() !== 1) {
 /* ---------- Configurações ---------- */
 $plataformasOk = ['PC', 'PS', 'Xbox', 'Switch'];
 $idadesOk      = [0 => 'Livre', 10 => '10+', 12 => '12+', 14 => '14+', 16 => '16+', 18 => '18+'];
+<<<<<<< HEAD
 $imagens = configImagens();
+=======
+<<<<<<< HEAD
+$imagens = configImagens();
+=======
+$MB = 1024 * 1024;
+$jpg = IMAGETYPE_JPEG; $png = IMAGETYPE_PNG; $webp = IMAGETYPE_WEBP;
+$extensoes = [$jpg => 'jpg', $png => 'png', $webp => 'webp'];
+
+// Cada imagem: rótulo, subpasta em uploads/, tamanho máximo e tipos aceitos.
+// A logo só aceita PNG/WebP porque precisa de fundo transparente.
+$imagens = [
+    'capa' => ['rotulo' => 'Capa',            'pasta' => 'capas', 'max' => 5 * $MB, 'tipos' => [$jpg, $png, $webp], 'aceita' => 'JPG, PNG ou WebP'],
+    'logo' => ['rotulo' => 'Logo',            'pasta' => 'logos', 'max' => 3 * $MB, 'tipos' => [$png, $webp],       'aceita' => 'PNG ou WebP'],
+    'hero' => ['rotulo' => 'Banner (hero)',   'pasta' => 'heros', 'max' => 8 * $MB, 'tipos' => [$jpg, $png, $webp], 'aceita' => 'JPG, PNG ou WebP'],
+];
+$pastaUploads = __DIR__ . '/../uploads';
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
 
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(16));
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+// Aceita "199,90" ou "199.90". Devolve null se não for um valor válido.
+function lerPreco($texto)
+{
+    $texto = str_replace(',', '.', trim((string)$texto));
+    if ($texto === '' || !is_numeric($texto)) {
+        return null;
+    }
+    $n = round((float)$texto, 2);
+    return ($n >= 0 && $n <= 99999999.99) ? $n : null;
+}
+
+/**
+ * Valida uma imagem enviada. Devolve:
+ *   null                       -> nenhum arquivo enviado (tudo bem, é opcional)
+ *   ['erro' => '...']          -> algo errado
+ *   ['tmp' => ..., 'ext' => ...] -> pronta para salvar
+ */
+function validarImagem($campo, $cfg, $extensoes)
+{
+    $arq = $_FILES[$campo] ?? null;
+    if (!$arq || $arq['error'] === UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+    $r = $cfg['rotulo'];
+    if ($arq['error'] === UPLOAD_ERR_INI_SIZE || $arq['error'] === UPLOAD_ERR_FORM_SIZE) {
+        return ['erro' => "$r: o arquivo passa do limite do servidor (" . ini_get('upload_max_filesize')
+            . "). Use uma imagem menor ou aumente upload_max_filesize no php.ini."];
+    }
+    if ($arq['error'] !== UPLOAD_ERR_OK) {
+        return ['erro' => "$r: não foi possível enviar o arquivo. Tente novamente."];
+    }
+    if ($arq['size'] > $cfg['max']) {
+        return ['erro' => "$r: o arquivo é grande demais (máximo " . round($cfg['max'] / 1048576) . " MB)."];
+    }
+    // Confere o conteúdo real do arquivo, não a extensão que o usuário escolheu
+    $info = @getimagesize($arq['tmp_name']);
+    if (!$info || !in_array($info[2], $cfg['tipos'], true)) {
+        return ['erro' => "$r: envie uma imagem " . $cfg['aceita'] . "."];
+    }
+    return ['tmp' => $arq['tmp_name'], 'ext' => $extensoes[$info[2]]];
+}
+
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
 /* ---------- Processa o formulário ---------- */
 $erros = [];
 $v = [
@@ -90,7 +164,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // ----- Imagens (todas opcionais) -----
         $prontas = [];
         foreach ($imagens as $campo => $cfg) {
+<<<<<<< HEAD
             $res = validarImagem($campo, $cfg);
+=======
+<<<<<<< HEAD
+            $res = validarImagem($campo, $cfg);
+=======
+            $res = validarImagem($campo, $cfg, $extensoes);
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
             if ($res === null) {
                 continue;
             }
@@ -107,17 +189,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nomes  = ['capa' => null, 'logo' => null, 'hero' => null];
             try {
                 foreach ($prontas as $campo => $img) {
+<<<<<<< HEAD
                     $gravada = salvarImagem($img, $imagens[$campo]);
                     $salvos[] = $gravada['caminho'];
                     $nomes[$campo] = $gravada['nome'];
+=======
+<<<<<<< HEAD
+                    $gravada = salvarImagem($img, $imagens[$campo]);
+                    $salvos[] = $gravada['caminho'];
+                    $nomes[$campo] = $gravada['nome'];
+=======
+                    $pasta = $pastaUploads . '/' . $imagens[$campo]['pasta'];
+                    if (!is_dir($pasta) && !mkdir($pasta, 0755, true)) {
+                        throw new RuntimeException('Não consegui criar a pasta ' . $imagens[$campo]['pasta'] . '.');
+                    }
+                    $nome = bin2hex(random_bytes(8)) . '.' . $img['ext'];
+                    if (!move_uploaded_file($img['tmp'], $pasta . '/' . $nome)) {
+                        throw new RuntimeException('Não consegui salvar a imagem (' . $imagens[$campo]['rotulo'] . ') no servidor.');
+                    }
+                    $salvos[] = $pasta . '/' . $nome;
+                    $nomes[$campo] = $nome;
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
                 }
 
                 $sql = "INSERT INTO jogos
                             (titulo, capa, logo, hero, plataforma, genero, desenvolvedora, lancamento, descricao, idade,
+<<<<<<< HEAD
                              preco, preco_original, destaque)
                         VALUES
                             (:titulo, :capa, :logo, :hero, :plataforma, :genero, :dev, :lancamento, :descricao, :idade,
                              :preco, :original, :destaque)
+=======
+<<<<<<< HEAD
+                             preco, preco_original, destaque)
+                        VALUES
+                            (:titulo, :capa, :logo, :hero, :plataforma, :genero, :dev, :lancamento, :descricao, :idade,
+                             :preco, :original, :destaque)
+=======
+                             preco, preco_original, destaque, estoque, vendas, qtd_avaliacoes)
+                        VALUES
+                            (:titulo, :capa, :logo, :hero, :plataforma, :genero, :dev, :lancamento, :descricao, :idade,
+                             :preco, :original, :destaque, 0, 0, 0)
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
                         RETURNING id";
                 $stmt = $conexao->prepare($sql);
                 $stmt->bindValue(':titulo', $v['titulo']);
@@ -160,6 +275,32 @@ $tituloPagina = 'Cadastrar jogo';
 require __DIR__ . '/../includes/header.php';
 ?>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  <style>
+    .form-jogo { display: grid; gap: 16px; max-width: 760px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .form-jogo .linha { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .form-jogo label, .form-jogo legend { display: grid; gap: 6px; font-size: 12.5px; color: var(--muted); }
+    .form-jogo fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .form-jogo input[type=text], .form-jogo input[type=date], .form-jogo select, .form-jogo textarea {
+      width: 100%; padding: 9px 12px; background: var(--bg); color: var(--text);
+      border: 1px solid var(--border); border-radius: var(--radius-sm); font: inherit; font-size: 14px;
+    }
+    .form-jogo input[type=file] { color: var(--muted); font-size: 13px; }
+    .form-jogo textarea { min-height: 110px; resize: vertical; }
+    .form-jogo .opcoes { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+    .form-jogo .opcoes label { display: flex; align-items: center; gap: 6px; color: var(--text); font-size: 14px; }
+    .form-jogo small { color: var(--muted); font-size: 11.5px; }
+    .previa { display: none; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg); }
+    .previa--logo { max-width: 240px; max-height: 100px; }
+    .previa--hero { width: 100%; max-height: 180px; object-fit: cover; }
+    .lista-erros { margin: 0; padding-left: 18px; }
+  </style>
+
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
   <main class="content content--full">
     <div class="content__main">
 
@@ -231,7 +372,15 @@ require __DIR__ . '/../includes/header.php';
           <label>Capa (<?= e($imagens['capa']['aceita']) ?>, até 5 MB)
             <input type="file" name="capa" accept="image/jpeg,image/png,image/webp" data-previa="previa-capa">
             <small>Proporção vertical (3:4). Aparece inteira nos cards.</small>
+<<<<<<< HEAD
             <img class="previa previa--capa" id="previa-capa" alt="Prévia da capa">
+=======
+<<<<<<< HEAD
+            <img class="previa previa--capa" id="previa-capa" alt="Prévia da capa">
+=======
+            <img class="previa" id="previa-capa" alt="Prévia da capa" style="aspect-ratio:3/4;width:140px">
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
           </label>
           <label>Logo (<?= e($imagens['logo']['aceita']) ?>, até 3 MB)
             <input type="file" name="logo" accept="image/png,image/webp" data-previa="previa-logo">

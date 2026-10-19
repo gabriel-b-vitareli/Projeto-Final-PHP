@@ -42,6 +42,25 @@ function htmlPlataformas($jogo)
     return $out . '</ul>';
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+function htmlNota($jogo, $comTotal = true)
+{
+    if ($jogo['nota'] === null || $jogo['nota'] === '') {
+        return '';
+    }
+    $nota = number_format((float)$jogo['nota'], 1, '.', '');
+    $out = '<svg class="icon fill"><use href="#i-star"/></svg><data value="' . e($nota) . '">' . e($nota) . '</data>';
+    if ($comTotal && (int)$jogo['qtd_avaliacoes'] > 0) {
+        $out .= ' <span>(' . e(abreviar($jogo['qtd_avaliacoes'])) . ')</span>';
+    }
+    return $out;
+}
+
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
 function htmlPreco($jogo, $comBadge = true)
 {
     $out = '<data value="' . e(number_format((float)$jogo['preco'], 2, '.', '')) . '">' . e(moeda($jogo['preco'])) . '</data>';
@@ -68,7 +87,15 @@ function htmlBotaoFavorito($jogo, $ehFavorito, $classe = 'fav')
 
 /**
  * Card de jogo (usado na home, loja e favoritos).
+<<<<<<< HEAD
  * $compacto = true  -> versão com a plataforma antes do título e a flag de lançamento (Novidades)
+=======
+<<<<<<< HEAD
+ * $compacto = true  -> versão com a plataforma antes do título e a flag de lançamento (Novidades)
+=======
+ * $compacto = true  -> versão com preço e nota na mesma linha (Novidades)
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
  */
 function cardJogo($jogo, $favoritos = [], $compacto = false)
 {
@@ -87,10 +114,26 @@ function cardJogo($jogo, $favoritos = [], $compacto = false)
     if ($compacto) {
         echo '<h3 class="card__title"><a href="' . $link . '">' . e($jogo['titulo']) . '</a></h3>';
         echo htmlPlataformas($jogo);
+<<<<<<< HEAD
         echo '<p class="price">' . htmlPreco($jogo, false) . '</p>';
     } else {
         echo htmlPlataformas($jogo);
         echo '<h3 class="card__title"><a href="' . $link . '">' . e($jogo['titulo']) . '</a></h3>';
+=======
+<<<<<<< HEAD
+        echo '<p class="price">' . htmlPreco($jogo, false) . '</p>';
+    } else {
+        echo htmlPlataformas($jogo);
+        echo '<h3 class="card__title"><a href="' . $link . '">' . e($jogo['titulo']) . '</a></h3>';
+=======
+        echo '<p class="price">' . htmlPreco($jogo, false)
+            . '<span class="rating">' . htmlNota($jogo) . '</span></p>';
+    } else {
+        echo htmlPlataformas($jogo);
+        echo '<h3 class="card__title"><a href="' . $link . '">' . e($jogo['titulo']) . '</a></h3>';
+        echo '<p class="rating">' . htmlNota($jogo) . '</p>';
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
         echo '<p class="price">' . htmlPreco($jogo) . '</p>';
     }
 

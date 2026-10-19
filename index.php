@@ -206,7 +206,15 @@ if (isset($_SESSION['id'])) {
         <div class="servico-item">
             <div class="icone"><img src="/uploads/pasta-icon.png" alt="🗂️"></div>
             <h3><span>1.</span> Organização Total</h3>
+<<<<<<< HEAD
             <p>Explore o catálogo, favorite e monte seu carrinho com facilidade</p>
+=======
+<<<<<<< HEAD
+            <p>Explore o catálogo, favorite e monte seu carrinho com facilidade</p>
+=======
+            <p>Compre e veja sua coleção de jogos com facilidade</p>
+>>>>>>> 858de2cc89f3f4bf5b48a48ee034e6e94423db6c
+>>>>>>> a0062fae2e46bfae4498c664b9a6665f09788420
         </div>
 
         <div class="servico-item">
