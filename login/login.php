@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Quem já está logado vai direto pra home
 if (isset($_SESSION['id'])) {
-    header("Location: /pages/inicial.php");
+    header('Location: ' . url('pages/inicial.php'));
     exit();
 }
 
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($usuario && verificarSenha($conexao, $usuario, $senhaDigitada)) {
         session_regenerate_id(true);
         $_SESSION['id'] = (int)$usuario['id'];
-        header("Location: /pages/inicial.php");
+        header('Location: ' . url('pages/inicial.php'));
         exit();
     }
     $erro = 'Usuário ou senha incorretos.';
@@ -37,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/login.css">
-    <link rel="shortcut icon" href="/uploads/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?= url('style/login.css') ?>">
+    <link rel="shortcut icon" href="<?= url('uploads/favicon.ico') ?>" type="image/x-icon">
     <title>Login</title>
 </head>
 
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Lado esquerdo -->
     <section class="apresentacao">
       <div class="logo">
-        <img src="/uploads/banner-maior.png" alt="Logo do site" width="450">
+        <img src="<?= url('uploads/banner-maior.png') ?>" alt="Logo do site" width="450">
       </div>
 
       <h1>Sua próxima jornada<br><span>começa aqui.</span></h1>
@@ -56,21 +56,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <ul class="beneficios">
         <li>
-          <span class="beneficio-icone"><img src="/uploads/controle-icon.png" alt=""></span>
+          <span class="beneficio-icone"><img src="<?= url('uploads/controle-icon.png') ?>" alt=""></span>
           <div>
             <strong>Os melhores jogos</strong>
             <small>Lançamentos, clássicos e muito mais.</small>
           </div>
         </li>
         <li>
-          <span class="beneficio-icone"><img src="/uploads/estrela-icon.png" alt=""></span>
+          <span class="beneficio-icone"><img src="<?= url('uploads/estrela-icon.png') ?>" alt=""></span>
           <div>
             <strong>Os melhores preços</strong>
             <small>Ofertas imperdíveis todos os dias.</small>
           </div>
         </li>
         <li>
-          <span class="beneficio-icone"><img src="/uploads/grafico-icon.png" alt=""></span>
+          <span class="beneficio-icone"><img src="<?= url('uploads/grafico-icon.png') ?>" alt=""></span>
           <div>
             <strong>Estatisticamente melhor que a concorrência</strong>
             <small>Melhores preços, melhores jogos, melhores histórias.</small>
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="botao-entrar">Entrar</button>
       </form>
 
-      <p class="cadastro">Ainda não tem uma conta? <a href="/login/cadastrar.php">Cadastre-se</a></p>
+      <p class="cadastro">Ainda não tem uma conta? <a href="<?= url('login/cadastrar.php') ?>">Cadastre-se</a></p>
     </section>
 
   </main>

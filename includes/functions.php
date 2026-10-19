@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/conexao.php';
 
 /* =========================================================
@@ -48,7 +49,7 @@ function imagemUrl($valor, $pasta)
     if (preg_match('#^https?://#i', $valor)) {
         return $valor;
     }
-    return '/uploads/' . $pasta . '/' . rawurlencode(basename($valor));
+    return url('uploads/' . $pasta . '/' . rawurlencode(basename($valor)));
 }
 
 function capaUrl($jogo)
@@ -66,13 +67,20 @@ function heroUrl($jogo)
     return imagemUrl($jogo['hero'] ?? '', 'heros');
 }
 
-// Só deixa redirecionar para caminhos internos do próprio site.
-function urlSegura($url, $padrao = '/pages/inicial.php')
+// Só deixa redirecionar para caminhos internos do próprio projeto (dentro da BASE_URL).
+function urlSegura($url, $padrao = null)
 {
-    if (is_string($url) && strlen($url) > 1 && $url[0] === '/' && $url[1] !== '/' && strpos($url, "\\") === false) {
+    $prefixo = BASE_URL . '/';
+    if (
+        is_string($url)
+        && strlen($url) > strlen($prefixo)
+        && strpos($url, $prefixo) === 0
+        && strpos($url, '//') !== 0
+        && strpos($url, "\\") === false
+    ) {
         return $url;
     }
-    return $padrao;
+    return $padrao ?? url('pages/inicial.php');
 }
 
 /* =========================================================

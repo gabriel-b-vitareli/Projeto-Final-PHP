@@ -19,7 +19,7 @@ $nomeUsuario = $usuarioId ? consultarNome($conexao, $usuarioId) : false;
 
 // Sessão de um usuário que não existe mais no banco: sai.
 if (!$nomeUsuario) {
-    header("Location: /login/logout.php");
+    header('Location: ' . url('login/logout.php'));
     exit();
 }
 $st = $conexao->prepare("SELECT nivel FROM usuarios WHERE id = :id");
@@ -50,9 +50,9 @@ function itemMenu($chave, $href, $icone, $texto, $atual, $contador = null)
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style/homepage.css">
-  <link rel="stylesheet" href="/style/app.css">
-  <link rel="shortcut icon" href="/uploads/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="<?= url('style/homepage.css') ?>">
+  <link rel="stylesheet" href="<?= url('style/app.css') ?>">
+  <link rel="shortcut icon" href="<?= url('uploads/favicon.ico') ?>" type="image/x-icon">
 </head>
 <body>
 
@@ -62,36 +62,36 @@ function itemMenu($chave, $href, $icone, $texto, $atual, $contador = null)
 
   <!-- ============ SIDEBAR ============ -->
   <aside class="sidebar">
-    <a class="logo" href="/pages/inicial.php">
-      <img src="/uploads/banner-maior.png" alt="Gameshelf" width="450">
+    <a class="logo" href="<?= url('pages/inicial.php') ?>">
+      <img src="<?= url('uploads/banner-maior.png') ?>" alt="Gameshelf" width="450">
     </a>
 
     <nav class="nav" aria-label="Principal">
       <?php
-      itemMenu('inicio',     '/pages/inicial.php',      'i-home',  'Início',        $paginaAtual);
-      itemMenu('loja',       '/pages/loja.php',         'i-bag',   'Loja',          $paginaAtual);
-      itemMenu('favoritos',  '/pages/favoritos.php',    'i-heart', 'Favoritos',     $paginaAtual);
-      itemMenu('carrinho',   '/pages/carrinho.php',     'i-cart',  'Carrinho',      $paginaAtual, $qtdCarrinho);
+      itemMenu('inicio',     url('pages/inicial.php'),      'i-home',  'Início',        $paginaAtual);
+      itemMenu('loja',       url('pages/loja.php'),         'i-bag',   'Loja',          $paginaAtual);
+      itemMenu('favoritos',  url('pages/favoritos.php'),    'i-heart', 'Favoritos',     $paginaAtual);
+      itemMenu('carrinho',   url('pages/carrinho.php'),     'i-cart',  'Carrinho',      $paginaAtual, $qtdCarrinho);
       if ($ehAdmin) {
-        itemMenu('admin', '/pages/gerenciar-jogos.php', 'i-crown', 'Gerenciar jogos', $paginaAtual);
+        itemMenu('admin', url('pages/gerenciar-jogos.php'), 'i-crown', 'Gerenciar jogos', $paginaAtual);
       }
       ?>
     </nav>
 
     <nav class="nav nav--bottom" aria-label="Conta">
-      <a class="nav__item" href="/login/logout.php"><svg class="icon"><use href="#i-arrow"/></svg><span>Sair</span></a>
+      <a class="nav__item" href="<?= url('login/logout.php') ?>"><svg class="icon"><use href="#i-arrow"/></svg><span>Sair</span></a>
     </nav>
   </aside>
 
   <!-- ============ TOPO ============ -->
   <header class="topbar">
-    <form class="search-form" action="/pages/loja.php" method="get" role="search">
+    <form class="search-form" action="<?= url('pages/loja.php') ?>" method="get" role="search">
       <label class="search">
         <svg class="icon"><use href="#i-search"/></svg>
         <input type="search" name="q" value="<?= e($buscaAtual) ?>" placeholder="Buscar por jogos, gêneros, plataformas...">
       </label>
     </form>
     <div class="topbar__actions">
-      <span class="user"><img class="user__avatar" src="/uploads/user-icon.png" alt=""><span><?= e($nomeUsuario) ?></span></span>
+      <span class="user"><img class="user__avatar" src="<?= url('uploads/user-icon.png') ?>" alt=""><span><?= e($nomeUsuario) ?></span></span>
     </div>
   </header>

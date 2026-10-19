@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 session_start();
 if (isset($_SESSION['id'])) {
-    header("Location: /pages/inicial.php");
+    header('Location: ' . url('pages/inicial.php'));
     exit();
 }
 ?>
@@ -11,8 +12,8 @@ if (isset($_SESSION['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/global.css">
-    <link rel="shortcut icon" href="/uploads/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?= url('style/global.css') ?>">
+    <link rel="shortcut icon" href="<?= url('uploads/favicon.ico') ?>" type="image/x-icon">
     <style>
         .botoes-login {
             display: inline-flex;
@@ -181,7 +182,7 @@ if (isset($_SESSION['id'])) {
 
     <header>
         <div align='center'>
-            <img src="/uploads/banner.png" alt="Banner GameShelf" height='50px'>
+            <img src="<?= url('uploads/banner.png') ?>" alt="Banner GameShelf" height='50px'>
         </div>
     </header>
     <br>
@@ -194,8 +195,8 @@ if (isset($_SESSION['id'])) {
     <br>
 
     <div align='center'>
-        <a class='botoes-login' href="/login/cadastrar.php">CRIAR CONTA GRÁTIS</a>
-        <a class='botoes-login' href="/login/login.php">JÁ TENHO UMA CONTA</a>
+        <a class='botoes-login' href="<?= url('login/cadastrar.php') ?>">CRIAR CONTA GRÁTIS</a>
+        <a class='botoes-login' href="<?= url('login/login.php') ?>">JÁ TENHO UMA CONTA</a>
     </div>
 
     <br>
@@ -204,19 +205,19 @@ if (isset($_SESSION['id'])) {
     <div class="servicos-container">
 
         <div class="servico-item">
-            <div class="icone"><img src="/uploads/pasta-icon.png" alt="🗂️"></div>
+            <div class="icone"><img src="<?= url('uploads/pasta-icon.png') ?>" alt="🗂️"></div>
             <h3><span>1.</span> Organização Total</h3>
             <p>Explore o catálogo, favorite e monte seu carrinho com facilidade</p>
         </div>
 
         <div class="servico-item">
-            <div class="icone"><img src="/uploads/estrela-icon.png" alt="⭐"></div>
+            <div class="icone"><img src="<?= url('uploads/estrela-icon.png') ?>" alt="⭐"></div>
             <h3><span>2.</span> Os melhores jogos</h3>
             <p>Navegue pelas melhores opções do mercado</p>
         </div>
 
         <div class="servico-item">
-            <div class="icone"><img src="/uploads/grafico-icon.png" alt="📊"></div>
+            <div class="icone"><img src="<?= url('uploads/grafico-icon.png') ?>" alt="📊"></div>
             <h3><span>3.</span> Os melhores preços</h3>
             <p>Promoções exclusivas e incríveis garantidas.</p>
         </div>

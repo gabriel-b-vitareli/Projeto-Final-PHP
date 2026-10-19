@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $_SESSION['csrf'] = bin2hex(random_bytes(16));
                 flash('Jogo cadastrado com sucesso.');
-                header('Location: /pages/jogo.php?id=' . $novoId);
+                header('Location: ' . url('pages/jogo.php?id=' . $novoId));
                 exit();
             } catch (Throwable $ex) {
                 // Se algo falhou depois do upload, não deixa imagens órfãs

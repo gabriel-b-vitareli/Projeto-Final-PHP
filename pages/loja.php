@@ -41,7 +41,7 @@ require __DIR__ . '/../includes/header.php';
         <p class="pagina-sub"><?= count($jogos) ?> <?= count($jogos) === 1 ? 'jogo encontrado' : 'jogos encontrados' ?><?= $buscaAtual !== '' ? ' para "' . e($buscaAtual) . '"' : '' ?></p>
       </div>
 
-      <form class="filtros" method="get" action="/pages/loja.php">
+      <form class="filtros" method="get" action="<?= url('pages/loja.php') ?>">
         <label>Busca
           <input type="search" name="q" value="<?= e($buscaAtual) ?>" placeholder="Título, gênero...">
         </label>
@@ -70,7 +70,7 @@ require __DIR__ . '/../includes/header.php';
         </label>
         <button class="btn btn--primary" type="submit">Filtrar</button>
         <?php if ($filtrando || $ordem !== 'relevantes'): ?>
-          <a class="btn btn--ghost" href="/pages/loja.php">Limpar</a>
+          <a class="btn btn--ghost" href="<?= url('pages/loja.php') ?>">Limpar</a>
         <?php endif; ?>
       </form>
 

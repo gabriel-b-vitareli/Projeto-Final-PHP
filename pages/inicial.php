@@ -40,11 +40,11 @@ require __DIR__ . '/../includes/header.php';
           <p class="hero__desc"><?= e($destaque['descricao']) ?></p>
           <p class="hero__price"><?= htmlPreco($destaque, false) ?></p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="/pages/jogo.php?id=<?= (int)$destaque['id'] ?>">Ver jogo</a>
-            <form method="post" action="/acoes/carrinho.php" class="form-inline">
+            <a class="btn btn--primary" href="<?= url('pages/jogo.php?id=' . (int)$destaque['id']) ?>">Ver jogo</a>
+            <form method="post" action="<?= url('acoes/carrinho.php') ?>" class="form-inline">
               <input type="hidden" name="acao" value="adicionar">
               <input type="hidden" name="jogo_id" value="<?= (int)$destaque['id'] ?>">
-              <input type="hidden" name="voltar" value="/pages/inicial.php">
+              <input type="hidden" name="voltar" value="<?= url('pages/inicial.php') ?>">
               <button class="btn btn--ghost" type="submit"><svg class="icon"><use href="#i-cart"/></svg>Adicionar ao carrinho</button>
             </form>
           </div>
@@ -57,7 +57,7 @@ require __DIR__ . '/../includes/header.php';
         <header class="section__head">
           <svg class="icon section__icon"><use href="#i-flame"/></svg>
           <div><h2>Em alta agora</h2><p>Os jogos em promoção com os maiores descontos.</p></div>
-          <a class="link" href="/pages/loja.php">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></a>
+          <a class="link" href="<?= url('pages/loja.php') ?>">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></a>
         </header>
         <?php if ($emAlta): ?>
           <ul class="grid"><?php foreach ($emAlta as $j) cardJogo($j, $favoritos); ?></ul>
@@ -71,7 +71,7 @@ require __DIR__ . '/../includes/header.php';
         <header class="section__head">
           <svg class="icon section__icon"><use href="#i-star"/></svg>
           <div><h2>Novidades na loja</h2><p>Lançamentos e jogos recentes para você.</p></div>
-          <a class="link" href="/pages/loja.php?ordem=novos">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></a>
+          <a class="link" href="<?= url('pages/loja.php?ordem=novos') ?>">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></a>
         </header>
         <?php if ($novidades): ?>
           <ul class="grid"><?php foreach ($novidades as $j) cardJogo($j, $favoritos, true); ?></ul>
@@ -91,20 +91,20 @@ require __DIR__ . '/../includes/header.php';
           <ul class="cart">
             <?php foreach ($carrinho as $item): ?>
             <li class="cart__item" data-game-id="<?= (int)$item['id'] ?>">
-              <a href="/pages/jogo.php?id=<?= (int)$item['id'] ?>" class="cart__thumb"><?= htmlCapa($item) ?></a>
+              <a href="<?= url('pages/jogo.php?id=' . (int)$item['id']) ?>" class="cart__thumb"><?= htmlCapa($item) ?></a>
               <div><h3><?= e($item['titulo']) ?></h3><data value="<?= e($item['preco']) ?>"><?= e(moeda($item['preco'])) ?></data></div>
-              <form method="post" action="/acoes/carrinho.php" class="form-inline">
+              <form method="post" action="<?= url('acoes/carrinho.php') ?>" class="form-inline">
                 <input type="hidden" name="acao" value="remover">
                 <input type="hidden" name="jogo_id" value="<?= (int)$item['id'] ?>">
-                <input type="hidden" name="voltar" value="/pages/inicial.php">
+                <input type="hidden" name="voltar" value="<?= url('pages/inicial.php') ?>">
                 <button type="submit" aria-label="Remover <?= e($item['titulo']) ?>"><svg class="icon"><use href="#i-x"/></svg></button>
               </form>
             </li>
             <?php endforeach; ?>
           </ul>
-          <a class="btn btn--primary btn--block" href="/pages/carrinho.php">Ver carrinho <svg class="icon"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--primary btn--block" href="<?= url('pages/carrinho.php') ?>">Ver carrinho <svg class="icon"><use href="#i-arrow"/></svg></a>
         <?php else: ?>
-          <p class="vazio">Seu carrinho está vazio. <a href="/pages/loja.php">Explorar a loja</a></p>
+          <p class="vazio">Seu carrinho está vazio. <a href="<?= url('pages/loja.php') ?>">Explorar a loja</a></p>
         <?php endif; ?>
       </section>
 
@@ -115,7 +115,7 @@ require __DIR__ . '/../includes/header.php';
           <?php foreach ($maisFavoritos as $i => $j): ?>
           <li class="rank__item" data-game-id="<?= (int)$j['id'] ?>">
             <span class="rank__pos"><?= $i + 1 ?></span>
-            <a href="/pages/jogo.php?id=<?= (int)$j['id'] ?>" class="cart__thumb"><?= htmlCapa($j) ?></a>
+            <a href="<?= url('pages/jogo.php?id=' . (int)$j['id']) ?>" class="cart__thumb"><?= htmlCapa($j) ?></a>
             <div><h3><?= e($j['titulo']) ?></h3><data value="<?= e($j['preco']) ?>"><?= e(moeda($j['preco'])) ?></data></div>
           </li>
           <?php endforeach; ?>

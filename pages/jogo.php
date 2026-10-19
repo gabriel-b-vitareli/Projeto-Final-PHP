@@ -6,7 +6,7 @@ require_once __DIR__ . '/../includes/componentes.php';
 $jogo = buscarJogo($conexao, (int)($_GET['id'] ?? 0));
 if (!$jogo) {
     flash('Jogo não encontrado.', 'erro');
-    header("Location: /pages/loja.php");
+    header('Location: ' . url('pages/loja.php'));
     exit();
 }
 
@@ -26,7 +26,7 @@ require __DIR__ . '/../includes/header.php';
 
       <?php exibirFlash(); ?>
 
-      <p><a class="link" style="margin-left:0" href="/pages/loja.php">&larr; Voltar para a loja</a></p>
+      <p><a class="link" style="margin-left:0" href="<?= url('pages/loja.php') ?>">&larr; Voltar para a loja</a></p>
 
       <article class="jogo" data-game-id="<?= (int)$jogo['id'] ?>">
         <div class="jogo__capa"><?= htmlCapa($jogo) ?></div>
@@ -53,9 +53,9 @@ require __DIR__ . '/../includes/header.php';
             </p>
 
             <?php if ($noCarrinho): ?>
-              <a class="btn btn--primary" href="/pages/carrinho.php"><svg class="icon"><use href="#i-cart"/></svg>Já está no carrinho</a>
+              <a class="btn btn--primary" href="<?= url('pages/carrinho.php') ?>"><svg class="icon"><use href="#i-cart"/></svg>Já está no carrinho</a>
             <?php else: ?>
-              <form method="post" action="/acoes/carrinho.php" class="form-inline">
+              <form method="post" action="<?= url('acoes/carrinho.php') ?>" class="form-inline">
                 <input type="hidden" name="acao" value="adicionar">
                 <input type="hidden" name="jogo_id" value="<?= (int)$jogo['id'] ?>">
                 <input type="hidden" name="voltar" value="<?= e($_SERVER['REQUEST_URI']) ?>">

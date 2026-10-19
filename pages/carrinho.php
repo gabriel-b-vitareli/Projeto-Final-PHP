@@ -26,16 +26,16 @@ require __DIR__ . '/../includes/header.php';
         <div class="carrinho-lista">
           <?php foreach ($itens as $item): ?>
           <div class="carrinho-linha" data-game-id="<?= (int)$item['id'] ?>">
-            <a href="/pages/jogo.php?id=<?= (int)$item['id'] ?>"><?= htmlCapa($item) ?></a>
+            <a href="<?= url('pages/jogo.php?id=' . (int)$item['id']) ?>"><?= htmlCapa($item) ?></a>
             <div>
-              <h2><a href="/pages/jogo.php?id=<?= (int)$item['id'] ?>"><?= e($item['titulo']) ?></a></h2>
+              <h2><a href="<?= url('pages/jogo.php?id=' . (int)$item['id']) ?>"><?= e($item['titulo']) ?></a></h2>
               <?= htmlPlataformas($item) ?>
             </div>
             <data value="<?= e($item['preco']) ?>"><?= e(moeda($item['preco'])) ?></data>
-            <form method="post" action="/acoes/carrinho.php" class="form-inline">
+            <form method="post" action="<?= url('acoes/carrinho.php') ?>" class="form-inline">
               <input type="hidden" name="acao" value="remover">
               <input type="hidden" name="jogo_id" value="<?= (int)$item['id'] ?>">
-              <input type="hidden" name="voltar" value="/pages/carrinho.php">
+              <input type="hidden" name="voltar" value="<?= url('pages/carrinho.php') ?>">
               <button class="carrinho-remover" type="submit" aria-label="Remover <?= e($item['titulo']) ?>"><svg class="icon"><use href="#i-x"/></svg></button>
             </form>
           </div>
@@ -49,7 +49,7 @@ require __DIR__ . '/../includes/header.php';
           </div>
         </div>
       <?php else: ?>
-        <p class="vazio">Seu carrinho está vazio. <a href="/pages/loja.php">Explorar a loja</a></p>
+        <p class="vazio">Seu carrinho está vazio. <a href="<?= url('pages/loja.php') ?>">Explorar a loja</a></p>
       <?php endif; ?>
     </div>
   </main>

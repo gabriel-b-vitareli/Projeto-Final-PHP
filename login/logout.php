@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/config.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -6,5 +7,5 @@ if (session_status() === PHP_SESSION_NONE) {
 $_SESSION = [];
 session_destroy();
 
-header("Location: /index.php");
+header('Location: ' . url('index.php'));
 exit();

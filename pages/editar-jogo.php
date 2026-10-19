@@ -6,7 +6,7 @@ $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $jogo = $id ? buscarJogo($conexao, $id) : false;
 if (!$jogo) {
     flash('Jogo não encontrado.', 'erro');
-    header('Location: /pages/gerenciar-jogos.php');
+    header('Location: ' . url('pages/gerenciar-jogos.php'));
     exit();
 }
 
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $_SESSION['csrf'] = bin2hex(random_bytes(32));
                 flash('Jogo atualizado com sucesso.');
-                header('Location: /pages/gerenciar-jogos.php');
+                header('Location: ' . url('pages/gerenciar-jogos.php'));
                 exit();
             } catch (Throwable $ex) {
                 // Se algo falhou, não deixa as imagens novas órfãs (as antigas continuam intactas)
@@ -261,7 +261,7 @@ require __DIR__ . '/../includes/header.php';
 
             <div class="admin-game__actions">
                 <button class="btn btn--primary" type="submit">Salvar alterações</button>
-                <a class="btn btn--ghost" href="/pages/gerenciar-jogos.php">Cancelar</a>
+                <a class="btn btn--ghost" href="<?= url('pages/gerenciar-jogos.php') ?>">Cancelar</a>
             </div>
         </form>
     </div>

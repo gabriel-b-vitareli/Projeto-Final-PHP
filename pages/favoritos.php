@@ -25,7 +25,7 @@ require __DIR__ . '/../includes/header.php';
       <?php if ($jogos): ?>
         <ul class="grid"><?php foreach ($jogos as $j) cardJogo($j, $favoritos); ?></ul>
       <?php else: ?>
-        <p class="vazio">Você ainda não favoritou nenhum jogo. Clique no coração de qualquer jogo na <a href="/pages/loja.php">loja</a>.</p>
+        <p class="vazio">Você ainda não favoritou nenhum jogo. Clique no coração de qualquer jogo na <a href="<?= url('pages/loja.php') ?>">loja</a>.</p>
       <?php endif; ?>
     </div>
   </main>

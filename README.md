@@ -15,11 +15,13 @@ Loja virtual de jogos feita em PHP puro (PDO) com PostgreSQL. Esta é a **versã
 
 2. **Conexão**: copie `includes/conexao.example.php` para `includes/conexao.php` e coloque seus dados. Esse arquivo não vai pro Git.
 
-3. **Servidor**: dentro da pasta do projeto (a raiz precisa ser a pasta do Gameshelf, porque os links começam com `/`):
+3. **Servidor**: dentro da pasta do projeto:
 
    ```bash
    php -S localhost:8000
    ```
+
+   Os endereços das páginas são calculados automaticamente (`includes/config.php`), então o projeto funciona tanto na raiz do site (`http://localhost:8000/`) quanto numa subpasta de um servidor (`http://servidor/gameshelf/`), sem configurar nada. Para o deploy num servidor, veja a seção "Deploy em servidor Linux" mais abaixo.
 
    A extensão `pdo_pgsql` precisa estar ativa no `php.ini`. Para enviar imagens grandes, confira `upload_max_filesize` e `post_max_size`.
 
@@ -30,6 +32,53 @@ Loja virtual de jogos feita em PHP puro (PDO) com PostgreSQL. Esta é a **versã
    ```sql
    UPDATE usuarios SET nivel = 1 WHERE usuario = 'seu_usuario';
    ```
+
+## Deploy em servidor Linux (Apache + PHP + PostgreSQL)
+
+Exemplo para Debian/Ubuntu, enviando os arquivos pelo MobaXterm (SSH/SFTP).
+
+1. **Pacotes** (no terminal SSH do servidor):
+
+   ```bash
+   sudo apt update
+   sudo apt install apache2 php libapache2-mod-php php-pgsql postgresql
+   ```
+
+2. **Enviar o projeto**: no MobaXterm, arraste a pasta do projeto para o painel SFTP à esquerda. Como `/var/www/html` costuma exigir `sudo`, envie para a sua home e mova:
+
+   ```bash
+   sudo mv ~/Projeto-Final-PHP /var/www/html/gameshelf
+   ```
+
+3. **Banco**:
+
+   ```bash
+   sudo -u postgres psql -c "CREATE USER gameshelf WITH PASSWORD 'troque-esta-senha';"
+   sudo -u postgres psql -c "CREATE DATABASE gameshelf OWNER gameshelf;"
+   cd /var/www/html/gameshelf
+   psql -h localhost -U gameshelf -d gameshelf -f database/schema.sql
+   psql -h localhost -U gameshelf -d gameshelf -f database/seed.sql
+   ```
+
+4. **Conexão**: `cp includes/conexao.example.php includes/conexao.php` e ajuste usuário, senha e banco (o `conexao.php` não vai pro Git, então cada ambiente tem o seu).
+
+5. **Permissão de escrita nos uploads** (o painel de administração grava imagens aqui):
+
+   ```bash
+   sudo chown -R www-data:www-data /var/www/html/gameshelf/uploads
+   ```
+
+6. **Acessar**: `http://IP-DO-SERVIDOR/gameshelf/`. Se preferir que o projeto fique na raiz do endereço, aponte o `DocumentRoot` do Apache para a pasta do projeto: o código funciona igual.
+
+7. **Antes de deixar no ar**: apague o `info.php` (ele mostra a configuração do PHP para qualquer visitante) e use uma senha forte no banco.
+
+Nginx com PHP-FPM também funciona sem mudanças no código.
+
+**Se algo der errado**
+
+- *Links ou CSS quebrados*: a detecção automática do endereço falhou (proxy reverso, `Alias` incomum). Crie `includes/config.local.php` com `<?php define('BASE_URL', '/gameshelf');` (use `''` se o projeto estiver na raiz). Esse arquivo também não vai pro Git.
+- *"could not find driver"*: falta o `php-pgsql`; instale e rode `sudo systemctl restart apache2`.
+- *Upload de imagem falha*: confira o passo 5 e os limites `upload_max_filesize` e `post_max_size` do `php.ini`.
 
 ## O que a loja faz
 
@@ -87,8 +136,9 @@ pages/               páginas internas
   inicial, loja, jogo, favoritos, carrinho       (clientes)
   gerenciar-jogos, cadastrar-game, editar-jogo   (administradores)
 acoes/               recebem os POST (favoritar, carrinho) e redirecionam
-includes/            conexao, functions (banco), componentes (HTML reutilizável),
-                     imagens (upload e preço), admin-nivel1, header/footer, icones
+includes/            config (endereço-base e url()), conexao, functions (banco),
+                     componentes (HTML reutilizável), imagens (upload e preço),
+                     admin-nivel1, header/footer, icones
 database/            schema.sql e seed.sql
 style/               global, login, homepage e app (complementos)
 uploads/             logos do site, ícones e imagens dos jogos
@@ -101,4 +151,5 @@ documentacao/        requisitos, paleta de cores e banco de dados
 - Todo texto vindo do banco ou do usuário passa por `e()` antes de aparecer na tela.
 - Toda consulta usa `prepare` com parâmetros. Nada de variável dentro da string SQL (a ordenação vem de uma lista fixa).
 - Alterações (favoritar, carrinho, editar, excluir) são sempre POST. As de administração levam token CSRF.
-- Redirecionamentos para a página de origem passam por `urlSegura()`, que só aceita caminhos internos.
+- Redirecionamentos para a página de origem passam por `urlSegura()`, que só aceita caminhos internos do projeto.
+- Nenhum endereço é escrito começando com `/` no código. Links, CSS, imagens, formulários e redirecionamentos usam `url('pages/loja.php')`, que acrescenta a subpasta do servidor quando existir. Caminhos de arquivo no disco usam `__DIR__`.

@@ -55,13 +55,13 @@ function htmlPreco($jogo, $comBadge = true)
     return $out;
 }
 
-// Botão de coração: envia um POST para /acoes/favoritos.php
+// Botão de coração: envia um POST para acoes/favoritos.php
 function htmlBotaoFavorito($jogo, $ehFavorito, $classe = 'fav')
 {
     $rotulo = $ehFavorito ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
-    return '<form method="post" action="/acoes/favoritos.php" class="form-inline">'
+    return '<form method="post" action="' . e(url('acoes/favoritos.php')) . '" class="form-inline">'
         . '<input type="hidden" name="jogo_id" value="' . (int)$jogo['id'] . '">'
-        . '<input type="hidden" name="voltar" value="' . e($_SERVER['REQUEST_URI'] ?? '/pages/inicial.php') . '">'
+        . '<input type="hidden" name="voltar" value="' . e($_SERVER['REQUEST_URI'] ?? url('pages/inicial.php')) . '">'
         . '<button class="' . $classe . ($ehFavorito ? ' is-fav' : '') . '" type="submit" aria-label="' . $rotulo . '" title="' . $rotulo . '">'
         . '<svg class="icon' . ($ehFavorito ? ' fill' : '') . '"><use href="#i-heart"/></svg></button></form>';
 }
@@ -74,7 +74,7 @@ function cardJogo($jogo, $favoritos = [], $compacto = false)
 {
     $id = (int)$jogo['id'];
     $ehFav = in_array($id, $favoritos, true);
-    $link = '/pages/jogo.php?id=' . $id;
+    $link = url('pages/jogo.php?id=' . $id);
 
     echo '<li><article class="card' . ($compacto ? ' card--compact' : '') . '" data-game-id="' . $id . '">';
     echo '<a class="card__cover" href="' . $link . '">' . htmlCapa($jogo) . '</a>';
