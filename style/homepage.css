@@ -14,7 +14,6 @@
   --primary: #6d3df0;
   --primary-hover: #7f55f5;
   --accent: #b7a3ff;
-  --star: #f5c04a;
   --green: #5ed08a;
   --radius: 12px;
   --radius-sm: 8px;
@@ -247,10 +246,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .platforms li.x { color: var(--green); }
 
-.rating { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
-.rating .icon { width: 12px; height: 12px; color: var(--star); }
-.rating data { font-weight: 400; color: var(--text); }
-
 .price { display: flex; align-items: center; gap: 6px; font-size: 14px; }
 .price data { font-size: 14px; }
 .price .badge { margin-left: auto; font-size: 10px; padding: 1px 6px; }
@@ -258,7 +253,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Variante compacta (Novidades) */
 .card--compact .card__cover { aspect-ratio: 16 / 9; }
 .card--compact .price { justify-content: space-between; }
-.card--compact .rating { color: var(--muted); }
 
 /* ---------- Painéis (coluna direita) ---------- */
 .panel {
@@ -311,7 +305,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .rank__item:nth-child(3) .rank__pos { background: #6b4fb0; }
 .rank__item h3 { font-size: 12.5px; font-weight: 500; }
 .rank__item data { display: block; font-size: 12px; font-weight: 500; color: #ddd8f7; }
-.rank__item .rating { margin-top: 2px; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 1200px) {

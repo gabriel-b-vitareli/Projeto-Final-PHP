@@ -83,17 +83,7 @@ input[type=text], input[type=email], input[type=password], input[type=number], i
 input:focus, select:focus, textarea:focus { border-color: var(--principal); outline: none; box-shadow: 0 0 0 3px rgba(139,92,246,.35); }
 input[type=file] { color: var(--texto-2); }
 textarea { resize: vertical; }
-.check, .sem-nota-opcao { font-weight: 400 !important; color: var(--texto-2); }
-
-/* Estrelas (entrada) – radios em ordem 5..1 com row-reverse */
-.avaliacao-input { display: inline-flex; flex-direction: row-reverse; vertical-align: middle; margin-left: .5rem; }
-.avaliacao-input input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.avaliacao-input label { margin: 0; font-size: 2rem; line-height: 1; cursor: pointer; color: var(--borda); padding: 0 .1rem; }
-.avaliacao-input input:checked ~ label,
-.avaliacao-input label:hover,
-.avaliacao-input label:hover ~ label { color: var(--atencao); }
-.avaliacao-input input:focus-visible + label { outline: 2px solid var(--ciano); border-radius: 4px; }
-.sem-nota-opcao { display: inline-block !important; }
+.check { font-weight: 400 !important; color: var(--texto-2); }
 
 .capa-atual { display: flex; align-items: center; gap: 1rem; margin-bottom: .6rem; }
 .capa-atual img { width: 80px; border-radius: 8px; border: 1px solid var(--borda); }
@@ -119,14 +109,12 @@ textarea { resize: vertical; }
 .meta { margin: 0; color: var(--texto-2); font-size: .85rem; }
 .card-rodape { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; }
 
-/* Etiquetas de status e estrelas (exibição) */
+/* Etiquetas de status */
 .etiqueta { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .78rem; font-weight: 600; border: 1px solid currentColor; }
 .status-quero { color: var(--ciano); }
 .status-jogando { color: var(--atencao); }
 .status-zerado { color: var(--sucesso); }
 .status-abandonado { color: var(--erro); }
-.estrelas { color: var(--atencao); letter-spacing: 1px; }
-.sem-nota { color: var(--texto-2); font-size: .8rem; }
 
 .vazio { text-align: center; padding: 2.5rem 1rem; background: var(--fundo-2); border: 1px dashed var(--borda); border-radius: var(--raio); color: var(--texto-2); }
 
@@ -137,7 +125,6 @@ textarea { resize: vertical; }
 .ficha { display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1.2rem; background: var(--card); border: 1px solid var(--borda); border-radius: var(--raio); padding: 1rem 1.2rem; }
 .ficha dt { color: var(--texto-2); }
 .ficha dd { margin: 0; }
-.avaliacao-texto { background: var(--fundo-2); border-left: 3px solid var(--principal); padding: .8rem 1rem; border-radius: 0 8px 8px 0; overflow-wrap: anywhere; }
 
 /* Responsivo */
 @media (max-width: 900px) {

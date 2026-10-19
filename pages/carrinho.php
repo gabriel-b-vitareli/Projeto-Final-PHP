@@ -47,11 +47,6 @@ require __DIR__ . '/../includes/header.php';
             <p class="pagina-sub">Total</p>
             <data value="<?= e(number_format($total, 2, '.', '')) ?>"><?= e(moeda($total)) ?></data>
           </div>
-          <div>
-            <!-- o pagamento ainda não existe: botão desativado de propósito -->
-            <button class="btn btn--primary" type="button" disabled>Finalizar compra</button>
-            <p class="aviso">O pagamento ainda não está disponível.</p>
-          </div>
         </div>
       <?php else: ?>
         <p class="vazio">Seu carrinho está vazio. <a href="/pages/loja.php">Explorar a loja</a></p>

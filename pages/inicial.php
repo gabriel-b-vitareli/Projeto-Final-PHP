@@ -9,7 +9,7 @@ $tituloPagina = 'Início';
 $destaque     = jogoDestaque($conexao);
 $emAlta       = jogosEmAlta($conexao, 5);
 $novidades    = jogosNovidades($conexao, 5);
-$maisVendidos = jogosMaisVendidos($conexao, 5);
+$maisFavoritos = jogosMaisFavoritados($conexao, 5);
 $favoritos    = idsFavoritos($conexao, $_SESSION['id']);
 $carrinho     = itensCarrinho($conexao, $_SESSION['id']);
 
@@ -56,7 +56,7 @@ require __DIR__ . '/../includes/header.php';
       <section class="section">
         <header class="section__head">
           <svg class="icon section__icon"><use href="#i-flame"/></svg>
-          <div><h2>Em alta agora</h2><p>Os jogos em promoção que mais vendem.</p></div>
+          <div><h2>Em alta agora</h2><p>Os jogos em promoção com os maiores descontos.</p></div>
           <a class="link" href="/pages/loja.php">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></a>
         </header>
         <?php if ($emAlta): ?>
@@ -108,15 +108,15 @@ require __DIR__ . '/../includes/header.php';
         <?php endif; ?>
       </section>
 
-      <!-- Mais vendidos -->
+      <!-- Mais favoritados -->
       <section class="panel">
-        <h2 class="panel__title"><svg class="icon"><use href="#i-trophy"/></svg>Mais vendidos</h2>
+        <h2 class="panel__title"><svg class="icon"><use href="#i-trophy"/></svg>Mais favoritados</h2>
         <ol class="rank">
-          <?php foreach ($maisVendidos as $i => $j): ?>
+          <?php foreach ($maisFavoritos as $i => $j): ?>
           <li class="rank__item" data-game-id="<?= (int)$j['id'] ?>">
             <span class="rank__pos"><?= $i + 1 ?></span>
             <a href="/pages/jogo.php?id=<?= (int)$j['id'] ?>" class="cart__thumb"><?= htmlCapa($j) ?></a>
-            <div><h3><?= e($j['titulo']) ?></h3><data value="<?= e($j['preco']) ?>"><?= e(moeda($j['preco'])) ?></data><p class="rating"><?= htmlNota($j, false) ?></p></div>
+            <div><h3><?= e($j['titulo']) ?></h3><data value="<?= e($j['preco']) ?>"><?= e(moeda($j['preco'])) ?></data></div>
           </li>
           <?php endforeach; ?>
         </ol>

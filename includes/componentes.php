@@ -42,19 +42,6 @@ function htmlPlataformas($jogo)
     return $out . '</ul>';
 }
 
-function htmlNota($jogo, $comTotal = true)
-{
-    if ($jogo['nota'] === null || $jogo['nota'] === '') {
-        return '';
-    }
-    $nota = number_format((float)$jogo['nota'], 1, '.', '');
-    $out = '<svg class="icon fill"><use href="#i-star"/></svg><data value="' . e($nota) . '">' . e($nota) . '</data>';
-    if ($comTotal && (int)$jogo['qtd_avaliacoes'] > 0) {
-        $out .= ' <span>(' . e(abreviar($jogo['qtd_avaliacoes'])) . ')</span>';
-    }
-    return $out;
-}
-
 function htmlPreco($jogo, $comBadge = true)
 {
     $out = '<data value="' . e(number_format((float)$jogo['preco'], 2, '.', '')) . '">' . e(moeda($jogo['preco'])) . '</data>';
@@ -81,7 +68,7 @@ function htmlBotaoFavorito($jogo, $ehFavorito, $classe = 'fav')
 
 /**
  * Card de jogo (usado na home, loja e favoritos).
- * $compacto = true  -> versão com preço e nota na mesma linha (Novidades)
+ * $compacto = true  -> versão com a plataforma antes do título e a flag de lançamento (Novidades)
  */
 function cardJogo($jogo, $favoritos = [], $compacto = false)
 {
@@ -100,12 +87,10 @@ function cardJogo($jogo, $favoritos = [], $compacto = false)
     if ($compacto) {
         echo '<h3 class="card__title"><a href="' . $link . '">' . e($jogo['titulo']) . '</a></h3>';
         echo htmlPlataformas($jogo);
-        echo '<p class="price">' . htmlPreco($jogo, false)
-            . '<span class="rating">' . htmlNota($jogo) . '</span></p>';
+        echo '<p class="price">' . htmlPreco($jogo, false) . '</p>';
     } else {
         echo htmlPlataformas($jogo);
         echo '<h3 class="card__title"><a href="' . $link . '">' . e($jogo['titulo']) . '</a></h3>';
-        echo '<p class="rating">' . htmlNota($jogo) . '</p>';
         echo '<p class="price">' . htmlPreco($jogo) . '</p>';
     }
 

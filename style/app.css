@@ -91,7 +91,6 @@
   padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
 }
 .carrinho-total data { font-size: 24px; color: var(--accent); }
-.aviso { color: var(--muted); font-size: 12px; }
 
 @media (max-width: 760px) {
   .jogo { grid-template-columns: 1fr; }
@@ -127,3 +126,38 @@
   filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .55));
 }
 .hero__title--logo small { margin-top: 10px; }
+/* Administração de jogos */
+.admin-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:22px; }
+.admin-games { display:grid; gap:12px; }
+.admin-game { display:flex; align-items:center; gap:16px; padding:14px; border:1px solid var(--border); background:var(--surface); border-radius:var(--radius); }
+.admin-game__cover { width:64px; height:84px; flex:0 0 64px; overflow:hidden; border-radius:var(--radius-sm); background:var(--bg); }
+.admin-game__cover img { width:100%; height:100%; object-fit:cover; }
+.admin-game__info { flex:1; min-width:0; }
+.admin-game__info h2 { margin:0 0 5px; font-size:16px; }
+.admin-game__info p { margin:0; color:var(--muted); font-size:13px; }
+.admin-game__actions { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.admin-game__actions form { margin:0; }
+.btn--danger { background:#a93232; color:#fff; border:1px solid #a93232; }
+.form-jogo { display:grid; gap:16px; max-width:760px; padding:20px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); }
+.form-jogo .linha { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
+.form-jogo label,.form-jogo legend { display:grid; gap:6px; font-size:12.5px; color:var(--muted); }
+.form-jogo fieldset { border:0; padding:0; margin:0; display:grid; gap:6px; }
+.form-jogo input[type=text],.form-jogo input[type=date],.form-jogo select,.form-jogo textarea { width:100%; padding:9px 12px; background:var(--bg); color:var(--text); border:1px solid var(--border); border-radius:var(--radius-sm); font:inherit; font-size:14px; }
+.form-jogo textarea { min-height:110px; resize:vertical; }
+.form-jogo .opcoes { display:flex; flex-wrap:wrap; gap:8px 18px; }
+.form-jogo .opcoes label { display:flex; align-items:center; gap:6px; color:var(--text); font-size:14px; }
+.form-jogo small { color:var(--muted); font-size:11.5px; }
+.form-jogo input[type=file] { color:var(--muted); font-size:13px; }
+.form-jogo .checkbox-inline { display:flex; align-items:center; gap:6px; color:var(--text); font-size:14px; }
+.form-jogo .lista-erros { margin:0; padding-left:18px; }
+.previa { display:none; object-fit:contain; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--bg); }
+.previa--capa { aspect-ratio:3/4; width:140px; }
+.previa--logo { max-width:240px; max-height:100px; }
+.previa--hero { width:100%; max-height:180px; object-fit:cover; }
+/* imagem que já está salva no jogo (tela de edição) */
+.imagem-atual { display:block; object-fit:contain; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--bg); }
+.imagem-atual--capa { aspect-ratio:3/4; width:140px; object-fit:cover; }
+.imagem-atual--logo { max-width:240px; max-height:100px; }
+.imagem-atual--hero { width:100%; max-height:180px; object-fit:cover; }
+.imagem-vazia { color:var(--muted); font-size:11.5px; }
+@media(max-width:600px) { .admin-game { align-items:flex-start; flex-wrap:wrap; } .admin-game__actions { width:100%; } }

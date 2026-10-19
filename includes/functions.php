@@ -16,13 +16,6 @@ function moeda($valor)
     return 'R$ ' . number_format((float)$valor, 2, ',', '.');
 }
 
-// 12400 -> "12.4k"
-function abreviar($n)
-{
-    $n = (int)$n;
-    return $n >= 1000 ? number_format($n / 1000, 1, '.', '') . 'k' : (string)$n;
-}
-
 function percentualDesconto($jogo)
 {
     $original = (float)($jogo['preco_original'] ?? 0);
@@ -196,9 +189,9 @@ function listarJogos($conexao, $f = [])
 
     // A ordenação vem de uma lista fixa: nunca coloque texto do usuário direto no ORDER BY.
     $ordens = [
-        'relevantes' => 'vendas DESC, titulo ASC',
+        // popularidade = quantas pessoas favoritaram o jogo
+        'relevantes' => '(SELECT COUNT(*) FROM favoritos f WHERE f.jogo_id = jogos.id) DESC, titulo ASC',
         'novos'      => 'lancamento DESC, titulo ASC',
-        'nota'       => 'nota DESC, qtd_avaliacoes DESC',
         'menor'      => 'preco ASC, titulo ASC',
         'maior'      => 'preco DESC, titulo ASC',
         'nome'       => 'titulo ASC',
@@ -226,15 +219,17 @@ function jogoDestaque($conexao)
     if ($jogo) {
         return $jogo;
     }
-    // sem nenhum marcado como destaque: usa o mais vendido
-    $stmt = $conexao->query("SELECT * FROM jogos ORDER BY vendas DESC LIMIT 1");
+    // sem nenhum marcado como destaque: usa o lançamento mais recente
+    $stmt = $conexao->query("SELECT * FROM jogos ORDER BY lancamento DESC LIMIT 1");
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-// "Em alta": jogos em promoção, dos mais vendidos pro menos.
+// "Em alta": jogos em promoção, do maior desconto pro menor.
 function jogosEmAlta($conexao, $limite = 5)
 {
-    $sql = "SELECT * FROM jogos WHERE preco_original > preco ORDER BY vendas DESC LIMIT " . (int)$limite;
+    $sql = "SELECT * FROM jogos WHERE preco_original > preco
+            ORDER BY (preco_original - preco) / preco_original DESC, titulo ASC
+            LIMIT " . (int)$limite;
     return $conexao->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -243,7 +238,8 @@ function jogosNovidades($conexao, $limite = 5)
     return listarJogos($conexao, ['ordem' => 'novos', 'limite' => $limite]);
 }
 
-function jogosMaisVendidos($conexao, $limite = 5)
+// "Mais favoritados": os jogos que mais pessoas marcaram com o coração.
+function jogosMaisFavoritados($conexao, $limite = 5)
 {
     return listarJogos($conexao, ['ordem' => 'relevantes', 'limite' => $limite]);
 }
