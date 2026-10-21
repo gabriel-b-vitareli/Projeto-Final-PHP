@@ -228,7 +228,7 @@ if (isset($_SESSION['id'])) {
 
     <div align='center'>
         <footer>
-            &copy; 2026 GameShelf - Seu catálogo pessoal
+            &copy; 2026 GameShelf
         </footer>
     </div>
 </body>

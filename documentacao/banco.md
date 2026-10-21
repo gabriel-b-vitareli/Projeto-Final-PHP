@@ -1,6 +1,6 @@
 # Banco de dados
 
-PostgreSQL. O arquivo `database/schema.sql` cria tudo (e pode ser rodado de novo sem perder dados de tabelas existentes); `database/seed.sql` insere os jogos de exemplo.
+PostgreSQL. O arquivo `database/schema.sql` cria tudo (e pode ser rodado de novo sem perder dados de tabelas existentes); `database/seed.sql` insere os 17 jogos de exemplo.
 
 ## Visão geral
 
@@ -51,7 +51,7 @@ CREATE TABLE jogos (
 
 | Coluna | Descrição |
 |---|---|
-| `capa`, `logo`, `hero` | Nome do arquivo em `uploads/capas/`, `uploads/logos/` e `uploads/heros/`, ou um link `http(s)://` completo. Vazio = sem imagem. |
+| `capa`, `logo`, `hero` | Nome do arquivo em `uploads/capas/`, `uploads/logos/` e `uploads/heros/`, ou um link `http(s)://` completo. Vazio = sem imagem. Os jogos do `seed.sql` usam arquivos `padrao-*` (veja [imagens-padrao.md](imagens-padrao.md)), que o painel nunca apaga do disco. |
 | `plataforma` | Lista separada por vírgula, sem espaço: `PC,PS,Xbox`. Valores aceitos no painel: PC, PS, Xbox, Switch. |
 | `idade` | Classificação indicativa: 0 (livre), 10, 12, 14, 16 ou 18. |
 | `preco` | Preço atual. |

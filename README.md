@@ -9,8 +9,15 @@ Vitrine, busca, favoritos, carrinho e um painel para administrar o catálogo.
 ![PHP](https://img.shields.io/badge/PHP-PDO-777BB4?logo=php&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-banco-4169E1?logo=postgresql&logoColor=white)
 ![Nginx](https://img.shields.io/badge/Nginx-servidor-009639?logo=nginx&logoColor=white)
+![HTML e CSS](https://img.shields.io/badge/HTML%20%2B%20CSS-sem%20framework-E34F26?logo=html5&logoColor=white)
 ![Versão](https://img.shields.io/badge/versão-beta-8B5CF6)
 ![Projeto](https://img.shields.io/badge/projeto-escolar-22D3EE)
+
+[**Telas**](#telas) &nbsp;·&nbsp; [**Início rápido**](#início-rápido) &nbsp;·&nbsp; [**Instalação completa**](#2-instalação-e-execução) &nbsp;·&nbsp; [**Requisitos**](#3-requisitos-funcionais) &nbsp;·&nbsp; [**Banco de dados**](#7-banco-de-dados)
+
+<br>
+
+<img src="documentacao/img/inicial.png" alt="Página inicial do Gameshelf, com o jogo em destaque" width="900">
 
 </div>
 
@@ -18,8 +25,8 @@ Vitrine, busca, favoritos, carrinho e um painel para administrar o catálogo.
 
 ## Sumário
 
-1. [Sobre o projeto](#1-sobre-o-projeto)
-2. [Instalação e execução](#2-instalação-e-execução)
+1. [Sobre o projeto](#1-sobre-o-projeto) (com as [telas](#telas))
+2. [Instalação e execução](#2-instalação-e-execução) (com o [início rápido](#início-rápido))
 3. [Requisitos funcionais](#3-requisitos-funcionais)
 4. [Regras de negócio](#4-regras-de-negócio)
 5. [Requisitos não funcionais](#5-requisitos-não-funcionais)
@@ -36,14 +43,64 @@ O **Gameshelf** é um **projeto escolar**: uma loja de jogos digitais construíd
 
 Esta é a **versão beta**. O fluxo do cliente termina no carrinho: pagamento e entrega dos jogos ficam para uma versão futura. Como o produto é digital, cada jogo entra no carrinho uma única vez, sem quantidade.
 
-<!--
-  Espaço reservado para capturas de tela. Quando tiver as imagens, salve em docs/img/
-  e descomente as linhas abaixo.
+### Telas
 
-  ![Página inicial](docs/img/inicial.png)
-  ![Loja](docs/img/loja.png)
-  ![Painel do administrador](docs/img/painel.png)
--->
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="documentacao/img/inicial.png" alt="Página inicial" width="100%"><br>
+      <b>Página inicial</b><br>
+      <sub>Destaque, "Em alta", "Novidades", carrinho e "Mais favoritados".</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="documentacao/img/loja.png" alt="Loja" width="100%"><br>
+      <b>Loja</b><br>
+      <sub>Busca, filtros por plataforma e gênero e cinco ordenações.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="documentacao/img/jogo.png" alt="Página de um jogo" width="100%"><br>
+      <b>Página do jogo</b><br>
+      <sub>Descrição, dados técnicos, desconto, favorito e carrinho.</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="documentacao/img/painel.png" alt="Painel do administrador" width="100%"><br>
+      <b>Painel do administrador</b><br>
+      <sub>Lista de jogos com atalhos para editar e excluir.</sub>
+    </td>
+  </tr>
+</table>
+
+<details>
+<summary><b>Ver mais telas</b></summary>
+
+<br>
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="documentacao/img/entrada.png" alt="Página de entrada" width="100%"><br>
+      <b>Página de entrada</b><br>
+      <sub>O que o visitante vê antes de entrar.</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="documentacao/img/carrinho.png" alt="Carrinho" width="100%"><br>
+      <b>Carrinho</b><br>
+      <sub>Itens e total, já com os descontos.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="documentacao/img/painel-cadastro.png" alt="Cadastro de jogo no painel" width="100%"><br>
+      <b>Cadastro de jogo</b><br>
+      <sub>Formulário com validação e prévia de capa, logo e banner.</sub>
+    </td>
+    </td>
+  </tr>
+</table>
+
+</details>
 
 ### Quem usa o sistema
 
@@ -82,6 +139,30 @@ O projeto não usa Composer nem npm. A única dependência é a extensão `pdo_p
 
 ## 2. Instalação e execução
 
+### Início rápido
+
+Para só ver o site funcionando no seu computador (Linux ou macOS, com Git, PHP com `pdo_pgsql` e PostgreSQL já instalados). Cole **um bloco por vez**; o `psql` pede a senha do banco:
+
+```bash
+git clone https://github.com/gabriel-b-vitareli/gameshelf && cd gameshelf
+```
+
+```bash
+sudo -u postgres psql -c "CREATE DATABASE gameshelf;" && sudo -u postgres psql -d gameshelf -f database/schema.sql && sudo -u postgres psql -d gameshelf -f database/seed.sql
+```
+
+```bash
+cp includes/conexao.example.php includes/conexao.php && nano includes/conexao.php
+```
+
+```bash
+php -S localhost:8000 -d upload_max_filesize=10M -d post_max_size=20M
+```
+
+Abra http://localhost:8000. Windows, servidor com Nginx, administrador e solução de problemas estão logo abaixo.
+
+### Dois caminhos de instalação
+
 Há dois jeitos de rodar o projeto. Escolha um:
 
 | Caminho | Para quê | Onde fica o projeto | Endereço |
@@ -91,6 +172,7 @@ Há dois jeitos de rodar o projeto. Escolha um:
 
 Os passos 1 a 3 e 5 a 6 são quase iguais nos dois caminhos; o que muda está marcado em cada passo.
 
+> [!TIP]
 > Cole **um bloco de comando por vez** e espere terminar antes do próximo. O `psql` pede a senha do banco, e uma linha colada junto seria lida como senha.
 
 ### 2.1 O que você precisa
@@ -178,11 +260,12 @@ sudo mkdir -p /var/www/gameshelf && sudo chown $USER:$USER /var/www/gameshelf &&
 
 Se você baixou o `.zip`, extraia na pasta do seu caminho e entre nela pelo terminal.
 
+> [!IMPORTANT]
 > Os passos seguintes devem ser feitos **dentro da pasta do projeto**. Para conferir, rode `pwd` (ou `cd` no PowerShell): o final do caminho deve ser `gameshelf`.
 
 ### Passo 2: criar o banco de dados
 
-Serão três comandos: criar o banco, criar as tabelas e cadastrar 11 jogos de exemplo.
+Serão três comandos: criar o banco, criar as tabelas e cadastrar 17 jogos de exemplo (já com capa, logo e banner).
 
 **Caminho A** (Windows e macOS). Cada comando pede a senha do usuário `postgres`:
 
@@ -230,8 +313,10 @@ psql -h localhost -U gameshelf -d gameshelf -f database/schema.sql
 psql -h localhost -U gameshelf -d gameshelf -f database/seed.sql
 ```
 
+> [!WARNING]
 > Rode o `seed.sql` **uma única (ou nenhuma, se preferir) vez**. Ele não verifica duplicidade, então rodar de novo repete os jogos. O `schema.sql`, ao contrário, pode ser rodado quantas vezes quiser sem apagar dados.
 
+> [!NOTE]
 > **Prefere o pgAdmin?** Clique com o botão direito em *Databases*, *Create*, *Database*, dê o nome `gameshelf` e salve. Depois abra o *Query Tool* nesse banco, carregue `database/schema.sql` e execute (F5). Repita com `database/seed.sql`.
 
 ### Passo 3: configurar a conexão com o banco
@@ -399,7 +484,7 @@ Abra o endereço que apareceu no navegador. Se ele não abrir de outra máquina,
 
 > O **Apache** também funciona sem mudar nada no código; a configuração do Nginx acima é só o que usamos neste projeto.
 
-**Deu certo se** a página de entrada abre com o banner do Gameshelf e, depois de criar uma conta e entrar, a loja mostra os 11 jogos de exemplo.
+**Deu certo se** a página de entrada abre com o banner do Gameshelf e, depois de criar uma conta e entrar, a loja mostra os 17 jogos de exemplo, com o **Helldivers 2** em destaque na página inicial.
 
 ### Passo 5: criar o primeiro administrador
 
@@ -425,9 +510,11 @@ psql -h localhost -U gameshelf -d gameshelf -c "UPDATE usuarios SET nivel = 1 WH
 
 Recarregue qualquer página da loja: o item **Gerenciar jogos** aparece no menu lateral. Não existe tela para promover outras contas; para isso, repita o comando com o outro usuário.
 
-### Passo 6: colocar imagens nos jogos (opcional)
+### Passo 6: imagens dos jogos
 
-Os jogos de exemplo vêm sem imagem: os cards mostram o título no lugar da capa. Há dois jeitos de resolver:
+Nada a fazer aqui para o básico: os 17 jogos de exemplo já vêm ligados a uma **capa, uma logo e um banner padrão**, que acompanham o repositório em `uploads/capas/`, `uploads/logos/` e `uploads/heros/` (arquivos com nome `padrao-<jogo>.jpg` ou `.png`). A lista completa está em [`documentacao/imagens-padrao.md`](documentacao/imagens-padrao.md).
+
+Para trocar ou acrescentar imagens, há dois jeitos:
 
 - **Pelo painel (recomendado):** entre como administrador, abra *Gerenciar jogos*, clique em **Editar** no jogo e envie capa, logo e banner.
 - **Por SQL:** aponte o nome de um arquivo que já esteja em `uploads/capas/`, ou um link `http(s)://` completo:
@@ -442,7 +529,10 @@ Os jogos de exemplo vêm sem imagem: os cards mostram o título no lugar da capa
 | Logo | `uploads/logos/` | PNG, WebP (fundo transparente) | 3 MB | destaque da página inicial, no lugar do título |
 | Banner | `uploads/heros/` | JPG, PNG, WebP | 8 MB | fundo do destaque da página inicial |
 
-As pastas `capas/`, `logos/` e `heros/` são criadas sozinhas no primeiro envio e ficam fora do Git (veja `uploads/.gitignore`).
+**Imagens padrão x uploads do painel.** O que o painel envia recebe um nome aleatório e **não vai para o Git** (veja `uploads/.gitignore`). Só os arquivos que começam com `padrao-` são versionados. Por isso o painel também **nunca apaga** uma imagem `padrao-*`, mesmo que o jogo seja excluído ou a imagem seja trocada. As pastas `capas/`, `logos/` e `heros/` são criadas sozinhas, se não existirem, no primeiro envio.
+
+> [!NOTE]
+> Se a imagem padrão de um jogo ainda não tiver sido adicionada à pasta, o card mostra uma imagem quebrada. Para conferir o que falta, use o comando de [`documentacao/imagens-padrao.md`](documentacao/imagens-padrao.md#conferir-o-que-falta).
 
 ### 2.2 Se algo der errado
 
@@ -578,7 +668,7 @@ A lista completa, com prioridades, também está em [`documentacao/requisitos.md
 | **RN22** | Cada jogo tem três imagens opcionais: capa (JPG, PNG ou WebP, até 5 MB), logo (PNG ou WebP, até 3 MB, para ter fundo transparente) e banner (JPG, PNG ou WebP, até 8 MB). |
 | **RN23** | Sem capa, o card mostra o título do jogo no lugar da imagem. Sem logo, o destaque da página inicial mostra o título em texto. |
 | **RN24** | Na edição, campo de imagem em branco mantém a imagem atual. Ao trocar, a imagem antiga é apagada do disco, mas só depois de o banco confirmar a alteração. |
-| **RN25** | Excluir um jogo apaga também os favoritos e os itens de carrinho dele (por `ON DELETE CASCADE`) e as imagens dele no disco. Imagens que são link `http(s)://` não são tocadas. |
+| **RN25** | Excluir um jogo apaga também os favoritos e os itens de carrinho dele (por `ON DELETE CASCADE`) e as imagens dele no disco. Imagens que são link `http(s)://` e as imagens padrão (`padrao-*`) não são tocadas. |
 | **RN26** | Excluir é sempre uma ação confirmada pelo administrador, enviada por formulário `POST` com token CSRF, nunca por um simples link. |
 | **RN27** | Se o banco falhar depois do upload, as imagens recém-gravadas são apagadas, para não sobrar arquivo órfão. |
 
@@ -741,7 +831,7 @@ Apagar uma conta ou um jogo apaga as linhas ligadas a ele em `favoritos` e `carr
 | Arquivo | Para que serve |
 |---|---|
 | `database/schema.sql` | Cria as tabelas. Pode ser rodado em banco novo ou em cima de um banco existente: usa `IF NOT EXISTS` e, no fim, remove as colunas antigas de avaliação, estoque e vendas (bloco "Limpeza da versão beta"). |
-| `database/seed.sql` | Insere 11 jogos de exemplo, sem imagens. **Rode uma única vez**, porque ele não verifica duplicidade. |
+| `database/seed.sql` | Insere 17 jogos de exemplo (Helldivers 2 em destaque), cada um com capa, logo e banner padrão de `uploads/`. **Rode uma única vez**, porque ele não verifica duplicidade. |
 | `database/backup_gameshelf.sql` | Backup do banco usado no desenvolvimento, incluído no repositório **a pedido do professor**. Ele tem a estrutura da versão anterior à beta (com as colunas `nota`, `estoque` e `vendas`), por isso a instalação usa o `schema.sql` e o `seed.sql`. |
 
 ---
@@ -784,7 +874,7 @@ gameshelf/
 │   └── icones.php            ícones em SVG usados pelo menu e pelos cards
 ├── database/
 │   ├── schema.sql            criação das tabelas
-│   ├── seed.sql              jogos de exemplo
+│   ├── seed.sql              17 jogos de exemplo, com imagens padrão
 │   └── backup_gameshelf.sql  backup do banco (entrega pedida pelo professor)
 ├── style/
 │   ├── global.css            página de entrada
@@ -793,13 +883,15 @@ gameshelf/
 │   └── app.css               complementos das páginas internas e do painel
 ├── uploads/
 │   ├── (logos do site e ícones)
-│   ├── capas/                capas enviadas pelo admin (criada sozinha, fora do Git)
-│   ├── logos/                logos enviadas pelo admin (criada sozinha, fora do Git)
-│   └── heros/                banners enviados pelo admin (criada sozinha, fora do Git)
+│   ├── capas/                capas: padrao-*.jpg (no Git) + enviadas pelo admin (fora do Git)
+│   ├── logos/                logos: padrao-*.png (no Git) + enviadas pelo admin (fora do Git)
+│   └── heros/                banners: padrao-*.jpg (no Git) + enviados pelo admin (fora do Git)
 └── documentacao/
     ├── requisitos.md         requisitos funcionais e não funcionais, com prioridades
     ├── banco.md              tabelas e colunas em detalhe
-    └── paleta-cores.md       cores da identidade visual
+    ├── imagens-padrao.md     lista das imagens padrão dos jogos de exemplo
+    ├── paleta-cores.md       cores da identidade visual
+    └── img/                  capturas de tela usadas neste README
 ```
 
 ### Funções principais
@@ -826,7 +918,8 @@ gameshelf/
 | | `htmlCapa()`, `htmlPlataformas()`, `htmlPreco()`, `htmlBotaoFavorito()` | Peças do card. |
 | `imagens.php` | `configImagens()` | Regras de cada imagem: pasta, tamanho máximo e tipos aceitos. |
 | | `lerPreco($texto)` | Aceita `199,90` ou `199.90` e devolve o número, ou `null` se for inválido. |
-| | `validarImagem()`, `salvarImagem()`, `apagarImagemLocal()` | Validam, gravam e removem as imagens. |
+| | `validarImagem()`, `salvarImagem()`, `apagarImagemLocal()` | Validam, gravam e removem as imagens. A remoção ignora links e imagens padrão. |
+| | `ehImagemPadrao($valor)` | Diz se o arquivo é uma imagem padrão (`padrao-*`), que o painel não apaga. |
 
 ### Convenções do código
 
