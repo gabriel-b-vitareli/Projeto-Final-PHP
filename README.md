@@ -347,7 +347,6 @@ Troque os dados do começo do arquivo pelos do seu PostgreSQL:
 
 ```php
 $host   = "localhost";
-$porta  = "5432";
 $dbname = "gameshelf";
 $user   = "seu_usuario";
 $pass   = "sua_senha";
@@ -355,7 +354,7 @@ $pass   = "sua_senha";
 
 | Campo | O que colocar |
 |---|---|
-| `$host`, `$porta` | `localhost` e `5432` servem quando o banco está no mesmo computador. Se estiver em outra máquina, use o IP dela. |
+| `$host` | `localhost` serve quando o banco está no mesmo computador. Se estiver em outra máquina, use o IP dela. A conexão usa a porta padrão do PostgreSQL (5432); para outra porta, acrescente `port=NUMERO;` na string `pgsql:` do `conexao.php`. |
 | `$dbname` | `gameshelf`, o banco criado no passo 2. |
 | `$user`, `$pass` | **Caminho A:** `postgres` e a senha que você definiu ao instalar o PostgreSQL. **Caminho B:** `gameshelf` e a senha do passo 2. |
 
@@ -529,7 +528,7 @@ Para trocar ou acrescentar imagens, há dois jeitos:
 | Logo | `uploads/logos/` | PNG, WebP (fundo transparente) | 3 MB | destaque da página inicial, no lugar do título |
 | Banner | `uploads/heros/` | JPG, PNG, WebP | 8 MB | fundo do destaque da página inicial |
 
-**Imagens padrão x uploads do painel.** O que o painel envia recebe um nome aleatório e **não vai para o Git** (veja `uploads/.gitignore`). Só os arquivos que começam com `padrao-` são versionados. Por isso o painel também **nunca apaga** uma imagem `padrao-*`, mesmo que o jogo seja excluído ou a imagem seja trocada. As pastas `capas/`, `logos/` e `heros/` são criadas sozinhas, se não existirem, no primeiro envio.
+**Imagens padrão x uploads do painel.** O que o painel envia recebe um nome aleatório e **não vai para o Git** (veja `uploads/.gitignore`). Só os arquivos que começam com `padrao-` são versionados. **Atenção:** o painel **ainda não** protege essas imagens. Excluir um jogo de exemplo, ou trocar a imagem dele, apaga o arquivo `padrao-*` do disco. Para recuperá-lo, restaure-o pelo Git (`git checkout -- uploads/`). As pastas `capas/`, `logos/` e `heros/` são criadas sozinhas, se não existirem, no primeiro envio.
 
 > [!NOTE]
 > Se a imagem padrão de um jogo ainda não tiver sido adicionada à pasta, o card mostra uma imagem quebrada. Para conferir o que falta, use o comando de [`documentacao/imagens-padrao.md`](documentacao/imagens-padrao.md#conferir-o-que-falta).
@@ -540,7 +539,7 @@ Para trocar ou acrescentar imagens, há dois jeitos:
 |---|---|---|
 | `php`, `psql` ou `git` "não é reconhecido" (Windows) | O Windows não sabe onde está o programa | Veja a seção "Windows" em [2.1](#21-o-que-você-precisa). |
 | `could not find driver` | Falta a extensão `pdo_pgsql` | Ative-a (Windows) ou instale `php-pgsql` (Linux), depois reinicie o servidor. |
-| `Erro ao conectar no banco: ...` | O PHP não falou com o banco | Confira os dados do `includes/conexao.php` (passo 3) e se o PostgreSQL está ligado. |
+| `Erro: ...` (mensagem do PDO, no topo da página) | O PHP não falou com o banco | Confira os dados do `includes/conexao.php` (passo 3) e se o PostgreSQL está ligado. |
 | Erro dizendo que `conexao.php` não existe | O arquivo de conexão não foi criado | Faça o passo 3. |
 | **502 Bad Gateway** (Nginx) | O Nginx não achou o PHP-FPM | Rode `ls /run/php/` e confira se o nome do arquivo `.sock` é o mesmo da linha `fastcgi_pass` em `/etc/nginx/sites-available/gameshelf`. Veja também se o serviço está ativo: `sudo systemctl status php$PHP_V-fpm`. |
 | **404 Not Found** em todas as páginas (Nginx) | O `root` da configuração está errado | Confira se `/var/www/gameshelf/index.php` existe e se a linha `root` aponta para essa pasta. |
@@ -668,7 +667,7 @@ A lista completa, com prioridades, também está em [`documentacao/requisitos.md
 | **RN22** | Cada jogo tem três imagens opcionais: capa (JPG, PNG ou WebP, até 5 MB), logo (PNG ou WebP, até 3 MB, para ter fundo transparente) e banner (JPG, PNG ou WebP, até 8 MB). |
 | **RN23** | Sem capa, o card mostra o título do jogo no lugar da imagem. Sem logo, o destaque da página inicial mostra o título em texto. |
 | **RN24** | Na edição, campo de imagem em branco mantém a imagem atual. Ao trocar, a imagem antiga é apagada do disco, mas só depois de o banco confirmar a alteração. |
-| **RN25** | Excluir um jogo apaga também os favoritos e os itens de carrinho dele (por `ON DELETE CASCADE`) e as imagens dele no disco. Imagens que são link `http(s)://` e as imagens padrão (`padrao-*`) não são tocadas. |
+| **RN25** | Excluir um jogo apaga também os favoritos e os itens de carrinho dele (por `ON DELETE CASCADE`) e as imagens dele no disco. Imagens que são link `http(s)://` não são tocadas. As imagens padrão (`padrao-*`) **também são apagadas do disco** (proteção ainda não implementada). |
 | **RN26** | Excluir é sempre uma ação confirmada pelo administrador, enviada por formulário `POST` com token CSRF, nunca por um simples link. |
 | **RN27** | Se o banco falhar depois do upload, as imagens recém-gravadas são apagadas, para não sobrar arquivo órfão. |
 
@@ -918,8 +917,7 @@ gameshelf/
 | | `htmlCapa()`, `htmlPlataformas()`, `htmlPreco()`, `htmlBotaoFavorito()` | Peças do card. |
 | `imagens.php` | `configImagens()` | Regras de cada imagem: pasta, tamanho máximo e tipos aceitos. |
 | | `lerPreco($texto)` | Aceita `199,90` ou `199.90` e devolve o número, ou `null` se for inválido. |
-| | `validarImagem()`, `salvarImagem()`, `apagarImagemLocal()` | Validam, gravam e removem as imagens. A remoção ignora links e imagens padrão. |
-| | `ehImagemPadrao($valor)` | Diz se o arquivo é uma imagem padrão (`padrao-*`), que o painel não apaga. |
+| | `validarImagem()`, `salvarImagem()`, `apagarImagemLocal()` | Validam, gravam e removem as imagens. A remoção ignora links e valores vazios. |
 
 ### Convenções do código
 
