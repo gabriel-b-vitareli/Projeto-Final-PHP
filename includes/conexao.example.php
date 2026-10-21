@@ -1,22 +1,17 @@
-<?php
-// Copie este arquivo para "conexao.php" (que fica fora do Git) e ajuste os dados.
-$host   = "localhost";
-$porta  = "5432";
-$dbname = "gameshelf";
-$user   = "seu_usuario";
-$pass   = "sua_senha";
+<?php 
+$host = "localhost"; // Endereço do servidor de banco de dados. Manter "localhost" se o banco estiver na mesma máquina do servidor web.
+$dbname = "gameshelf"; // Nome do banco de dados que você criou no PostgreSQL. Se o método padrão foi realizado, deve-se manter "gameshelf".
+$user = "gameshelf"; // Nome do usuário do banco de dados. 
+$pass = "12345"; // Senha do usuário do banco de dados. 
 
 try {
     $conexao = new PDO(
-        "pgsql:host=$host;port=$porta;dbname=$dbname",
+        "pgsql:host=$host;
+        dbname=$dbname",
         $user,
-        $pass,
-        [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]
+        $pass
     );
 } catch (PDOException $e) {
-    // Em produção não mostre o erro cru; aqui, pra estudo, ajuda a achar o problema.
-    die("Erro ao conectar no banco: " . $e->getMessage());
+    echo "Erro: " .$e->getMessage();
 }
+?>
